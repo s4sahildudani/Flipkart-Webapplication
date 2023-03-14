@@ -1,60 +1,72 @@
-import React, { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import React from 'react';
 import Card1 from "../images/card1.jpg";
 import Card2 from "../images/card2.jpg";
+import Carousel from 'react-elastic-carousel';
+import Shoes from '../images/shoes.jpg';
+import Guitar from '../images/guitar.jpg';
+import Cooktops from '../images/Cooktops.jpg';
+import { Card, Typography } from '@mui/material';
 function ControlledCarousel() {
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
-
+  const breakPoints = [
+    {width:1,itemsToShow:1},
+    {width:550,itemsToShow:2},
+    {width:700,itemsToShow:3},
+    {width:1200,itemsToShow:4}
+ ]
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-      <img
-          src={Card2}
-          className="d-block w-100"
-          alt=""
-          Height="40%"
-          width="40%"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img
-          className="d-block w-100"
-          src={Card1}
-          alt="First slide"
-          Height="40%"
-          width="40%"
-        />
-
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img
-          className="d-block w-100"
-          src={Card1}
-          alt="First slide"
-          Height="40%"
-          width="40%"
-        />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+    <div style={{marginTop:"3%"}}>
+     <Carousel breakPoints={breakPoints}>
+      <Card>
+      <img src={Shoes} alt=""  />
+      <Typography>Puma Adidas and more</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Running walking shoes</Typography>
+      </Card>
+       <Card>
+       <img src={Cooktops} alt="" />
+       <Typography>Cooktops and more</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Cooktops</Typography>
+       </Card>
+       <Card>
+       <img src={Guitar} alt=""  />
+       <Typography>Guitar</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Guitar</Typography>
+       </Card>
+       <Card>
+       <img src={Shoes} alt=""  />
+       <Typography>Puma Adidas and more</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Running walking shoes</Typography>
+       </Card>
+      
+       <Card>
+      <img src={Shoes} alt=""  />
+      <Typography>Puma Adidas and more</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Running walking shoes</Typography>
+      </Card>
+      <Card>
+       <img src={Cooktops} alt="" />
+       <Typography>Cooktops and more</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Cooktops</Typography>
+       </Card>
+       <Card>
+       <img src={Guitar} alt=""  />
+       <Typography>Guitar</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Guitar</Typography>
+       </Card>
+       <Card>
+       <img src={Shoes} alt=""  />
+       <Typography>Puma Adidas and more</Typography>
+      <Typography>Min 50% Off</Typography>
+      <Typography>Running walking shoes</Typography>
+       </Card>
+     </Carousel>
+    </div>
   );
 }
 

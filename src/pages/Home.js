@@ -13,8 +13,8 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import ReactCarousel from "../components/ReactCarousel";
 import ControlledCarousel from "../components/ControlledCarousel";
-
-
+import ShopNow from "../components/ShopNow";
+import Offers from "../components/Offers";
 
 function Home() {
   return (
@@ -92,15 +92,22 @@ function Home() {
           </Container>
         </AppBar>
 
+        {/* Slider */}
+        <ReactCarousel />
+
         {/* Card  */}
         <Card />
 
-        {/* Slider */}
+        {/* cards carousel */}
+        <ControlledCarousel />
+        {/* shopNow */}
+        <ShopNow />
 
-        {/* <ControlledCarousel /> */}
+        {/* discount */}
+        <Offers />
         {/* Footer */}
 
-       <Footer />
+        <Footer />
       </div>
     </>
   );

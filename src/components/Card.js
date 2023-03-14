@@ -16,7 +16,7 @@ function Card() {
       <Grid container>
         <Grid items xs={12} sm={12} md={12} lg={12}>
           <Box
-            sx={{ display: "flex", padding: "1%", border: "3px solid black" }}
+            sx={{ display: "flex", padding: "1%" }}
             justifyContent="space-between"
             flexDirection="row"
           >

@@ -1,51 +1,26 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from 'react-elastic-carousel';
 import Card1 from "../images/card1.jpg";
 import Card2 from "../images/card2.jpg";
 import Card3 from "../images/card3.jpg";
+import Carousel3 from '../images/Carousel3.jpg';
 function ReactCarousel() {
+
+  const breakPoints = [
+     {width:"90%",itemsToShow:1},
+     {width:"90%",itemsToShow:2},
+     {width:"90%",itemsToShow:3},
+     {width:"90%",itemsToShow:4}
+  ]
   return (
-    <div>
-     <Carousel>
-      <Carousel.Item>
-        <img
-          src={Card1}
-          className="d-block w-100"
-          alt=""
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src={Card2}
-          className="d-block w-100"
-          alt=""
-        />
-
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src={Card2}
-          className="d-block w-100"
-          alt=""
-        />
-
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+    <div style={{marginTop:"3%"}}>
+     <Carousel breakPoints={breakPoints}>
+       <img src={Carousel3} alt="" Width="100%" />
+       <img src={Carousel3} alt="" Width="100%" />
+       <img src={Carousel3} alt="" Width="100%" />
+       <img src={Carousel3} alt="" Width="100%" />
+     </Carousel>
     </div>
   );
 }
