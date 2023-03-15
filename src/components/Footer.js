@@ -88,6 +88,14 @@ function Footer() {
           <Box>
             <Typography sx={{color:"white"}}>© 2007-2023 Flipkart.com</Typography>
           </Box>
+          <Box>
+            <img alt="" />
+            <img alt="" />
+            <img alt="" />
+            <img alt="" />
+            <img alt="" />
+            <img alt="" />
+          </Box>
         </Box>
       </Box>
     </>

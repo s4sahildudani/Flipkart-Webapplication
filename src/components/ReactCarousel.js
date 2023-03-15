@@ -1,9 +1,5 @@
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Carousel from 'react-elastic-carousel';
-import Card1 from "../images/card1.jpg";
-import Card2 from "../images/card2.jpg";
-import Card3 from "../images/card3.jpg";
 import Carousel3 from '../images/Carousel3.jpg';
 function ReactCarousel() {
 
@@ -14,7 +10,7 @@ function ReactCarousel() {
      {width:"90%",itemsToShow:4}
   ]
   return (
-    <div style={{marginTop:"3%"}}>
+    <div style={{marginTop:"1%"}}>
      <Carousel breakPoints={breakPoints}>
        <img src={Carousel3} alt="" Width="100%" />
        <img src={Carousel3} alt="" Width="100%" />
