@@ -1,13 +1,15 @@
 import React ,{useState} from 'react';
 import {AppBar ,Box,Typography,Toolbar ,Container ,Grid ,Dialog ,InputBase,Paper ,Button ,IconButton ,TextField} from "@mui/material";
 import Login from "../images/login.jpg";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+// import useMediaQuery from "@mui/material/useMediaQuery";
+// import { useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 function NavData() {
     const [open, setOpen] =useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  // const theme = useTheme();
+  // const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
     const handleClickOpen = () => {
         setOpen(true);
       };
@@ -15,6 +17,9 @@ function NavData() {
       const handleClose = () => {
         setOpen(false);
       }; 
+      const handleCarts = () =>{
+        navigate("/cart")
+      }
   return (
     <div>
         <AppBar position="static">
@@ -76,40 +81,39 @@ function NavData() {
                 Login
               </Button>
               <Dialog
-                fullScreen={fullScreen}
+                
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
-                sx={{}}
+                
               >
                 <Grid container textAlign="center">
                   <Box
-                    sx={{ display: "flex", maxWidth: "100%", height: "530px" }}
+                    sx={{ display: "flex", width: "1000px", height: "530px" ,overflow:"hidden" }}
                   >
                     <Grid items xs={5} sm={5} md={5} lg={5}>
                       <Box
                         sx={{
                           background: "#2874f0",
-                          fontSize: "15px",
-                          padding: "40px 33px",
-                          height: "85%",
+                          padding:"20%",
+                          height: "100%",
                         }}
                       >
-                        <Typography sx={{ color: "white", fontSize: "15px" }}>
+                        <Typography sx={{ color: "white", fontSize: "25px" ,marginRight:"20%" }}>
                           Login
                         </Typography>
 
                         <Typography
                           sx={{
                             color: "white",
-                            fontSize: "1rem",
+                            fontSize: "18px",
                             marginTop: "20%",
                           }}
                         >
                           Get access to your Orders, Wishlist and
                           Recommendations
                         </Typography>
-                        <img style={{ marginTop: "20%" }} src={Login} alt="" />
+                        <img style={{ marginTop: "220px" }} src={Login} alt="" />
                       </Box>
                     </Grid>
                     <Grid items xs={7} sm={7} md={7} lg={7}>
@@ -120,22 +124,23 @@ function NavData() {
                           label="Enter Email/Mobile Number"
                           variant="standard"
                         />
-                        <Typography>
+                        <Typography sx={{fontSize:"15px",marginTop:"30px"}}>
                           By continuing, you agree to Flipkart's Terms of Use
                           and Privacy Policy.
                         </Typography>
                         <Button
                           sx={{
-                            background: "orange",
+                            background: "rgb(251, 100, 27)",
                             color: "white",
                             width: "100%",
+                            marginTop:"30px"
                           }}
                         >
                           Request OTP
                         </Button>
-                        <Box sx={{display:"flex"}}>
-                          <Typography>New to Flipkart? </Typography>
-                          <Typography>Create an account</Typography>
+                        <Box sx={{display:"flex" , marginTop:"220px"}}>
+                          <Typography sx={{color:"#2874f0"}}>New to Flipkart? </Typography>
+                          <Typography sx={{color:"#2874f0"}}>Create an account</Typography>
                         </Box>
                       </Box>
                     </Grid>
@@ -149,7 +154,7 @@ function NavData() {
               <Typography sx={{ marginLeft: "3%", fontSize: "1.2rem" }}>
                 More
               </Typography>
-              <Typography sx={{ marginLeft: "3%", fontSize: "1.2rem" }}>
+              <Typography onClick={handleCarts} sx={{ marginLeft: "3%", fontSize: "1.2rem" }}>
                 Cart
               </Typography>
             </Toolbar>

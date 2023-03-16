@@ -11,7 +11,7 @@ import Card9 from "../images/card9.jpg";
 import { Grid, Box, Typography } from "@mui/material";
 import './Card.css';
 import Button from "@mui/material/Button";
-function Card({handleFlightdata}) {
+function Card({handleFlightdata ,handleOffers}) {
   return (
     <>
       <Grid container>
@@ -21,7 +21,7 @@ function Card({handleFlightdata}) {
             justifyContent="space-between"
             flexDirection="row"
           >
-            <Box>
+            <Box onClick={handleOffers}>
               <img src={Card1} alt="" width="auto" height="60%" />
               <Typography><b>Top Offers</b></Typography>
             </Box>
