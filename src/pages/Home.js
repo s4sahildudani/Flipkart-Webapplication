@@ -24,9 +24,9 @@ function Home() {
         {/* Card  */}
         <Card  handleFlightdata={handleFlightdata} handleOffers={handleOffers} />
         {/* Slider */}
-        <ReactCarousel />
+        <ReactCarousel items="true" />
         {/* cards carousel */}
-        <ControlledCarousel />
+        <ControlledCarousel items="true" />
         {/* shopNow */}
         <ShopNow />
         {/* discount */}

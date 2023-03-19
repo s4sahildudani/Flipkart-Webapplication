@@ -13,10 +13,10 @@ function TopOffers() {
   return (
     <div>
       <Grid container>
-        <Grid items xs={12} sm={12} lg={12} md={12}>
+        <Grid item xs={12} sm={12} lg={12} md={12}>
           <NavData />
           <Grid sx={{ display: "flex", justifyContent: "space-between",marginLeft:"7%" }}>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -43,7 +43,7 @@ function TopOffers() {
                 <Typography>Lowest Price Ever</Typography>
               </Card>
             </Grid>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -66,7 +66,7 @@ function TopOffers() {
                 <Typography>Lowest Price Ever</Typography>
               </Card>
             </Grid>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -89,7 +89,7 @@ function TopOffers() {
                 <Typography>Bset Discount Ever</Typography>
               </Card>
             </Grid>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -116,7 +116,7 @@ function TopOffers() {
             </Grid>
           </Grid>
           <Grid sx={{ display: "flex" ,marginLeft:"7%" }}>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -139,7 +139,7 @@ function TopOffers() {
                 <Typography>Lowest Price Ever</Typography>
               </Card>
             </Grid>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -162,7 +162,7 @@ function TopOffers() {
                 <Typography>By Nova</Typography>
               </Card>
             </Grid>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",
@@ -186,7 +186,7 @@ function TopOffers() {
                 <Typography>Notebook sets pens and more</Typography>
               </Card>
             </Grid>
-            <Grid items xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
+            <Grid item xs={3} sm={3} md={3} lg={3} sx={{ padding: "1%" }}>
               <Card
                 sx={{
                   padding: "2%",

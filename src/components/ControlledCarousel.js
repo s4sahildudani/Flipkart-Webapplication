@@ -1,6 +1,4 @@
 import React from "react";
-import Card1 from "../images/card1.jpg";
-import Card2 from "../images/card2.jpg";
 import Carousel from "react-elastic-carousel";
 import Shoes from "../images/shoes.jpg";
 import Guitar from "../images/guitar.jpg";

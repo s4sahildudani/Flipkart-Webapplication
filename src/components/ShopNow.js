@@ -6,17 +6,17 @@ function ShopNow() {
   return (
     <div>
       <Grid container >
-        <Grid items xs={4} sm={4} md={4} lg={4}  sx={{padding:"1%"}}>
+        <Grid item xs={4} sm={4} md={4} lg={4}  sx={{padding:"1%"}}>
         <Card sx={{padding:"2%"}}>
             <img src={shopNow1}  alt="" width="100%" />
         </Card>
         </Grid>
-        <Grid items xs={4} sm={4} md={4} lg={4} sx={{padding:"1%"}}>
+        <Grid item xs={4} sm={4} md={4} lg={4} sx={{padding:"1%"}}>
         <Card sx={{padding:"2%"}}>
             <img src={shopNow1}  alt="" width="100%" />
         </Card>
         </Grid>
-        <Grid items xs={4} sm={4} md={4} lg={4} sx={{padding:"1%"}}>
+        <Grid item xs={4} sm={4} md={4} lg={4} sx={{padding:"1%"}}>
         <Card sx={{padding:"2%"}}>
             <img src={shopNow1}  alt="" width="100%" />
         </Card>

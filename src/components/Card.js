@@ -15,7 +15,7 @@ function Card({handleFlightdata ,handleOffers}) {
   return (
     <>
       <Grid container>
-        <Grid items xs={12} sm={12} md={12} lg={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <Box
             sx={{ display: "flex", padding: "1%" }}
             justifyContent="space-between"
