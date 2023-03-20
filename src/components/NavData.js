@@ -38,7 +38,7 @@ function NavData() {
     navigate("/cart");
   };
   const handleDownloadApp = () => {
-    navigate("/downloadApp");
+    navigate("/downloadData");
     setAnchorEl(null);
   };
   const handleCustomerCare = () => {
@@ -57,8 +57,9 @@ function NavData() {
     console.log("click");
     setAnchorEl(event.currentTarget);
   };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
+  
+  const handleSeller = () => {
+    navigate("/seller");
   };
   return (
     <div>
@@ -196,7 +197,7 @@ function NavData() {
               </Grid>
               <Box></Box>
             </Dialog>
-            <Typography sx={{ marginLeft: "3%", fontSize: "1.3rem" }}>
+            <Typography onClick={handleSeller} sx={{ marginLeft: "3%", fontSize: "1.3rem" }}>
               Become a seller
             </Typography>
             <Typography

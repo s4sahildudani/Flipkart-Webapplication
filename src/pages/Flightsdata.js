@@ -10,7 +10,7 @@ function Flightsdata() {
   return (
     <div>
       <Grid container>
-        <Grid items xs={12} sm={12} md={12} lg={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <NavData />
           <Box sx={{ padding: "1%" }}>
             <img width="100%" height="680px" src={Travel2} alt="" />
@@ -25,34 +25,34 @@ function Flightsdata() {
           </Box>
 
           <Grid sx={{ display: "flex" }}>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={CardFlights} alt="" width="100%" />
               </Card>
             </Grid>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={CardFlights2} alt="" width="100%" />
               </Card>
             </Grid>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={CardFlights3} alt="" width="100%" />
               </Card>
             </Grid>
           </Grid>
           <Grid sx={{ display: "flex" }}>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={CardFlights} alt="" width="100%" />
               </Card>
             </Grid>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={CardFlights2} alt="" width="100%" />
               </Card>
             </Grid>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={CardFlights3} alt="" width="100%" />
               </Card>
@@ -69,17 +69,17 @@ function Flightsdata() {
             </Box>
           <Grid sx={{display:"flex"}}>
             
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={Pinktravel} alt="" width="100%" />
               </Card>
             </Grid>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={Pinktravel} alt="" width="100%" />
               </Card>
             </Grid>
-            <Grid items xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
+            <Grid item xs={4} sm={4} md={4} lg={4} sx={{ padding: "1%" }}>
               <Card sx={{ padding: "2%" }}>
                 <img src={Pinktravel} alt="" width="100%" />
               </Card>
