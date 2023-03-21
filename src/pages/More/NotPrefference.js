@@ -1,8 +1,17 @@
 import React from 'react'
+import { Grid ,Box ,Typography ,Card } from '@mui/material'
 
 function NotPrefference() {
   return (
-    <div>NotPrefference</div>
+    <>
+    <Grid>
+      <Grid>
+            <Card>
+
+            </Card>
+      </Grid>
+    </Grid>
+    </>
   )
 }
 
