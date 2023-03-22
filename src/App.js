@@ -10,6 +10,8 @@ import Advertise from "./pages/More/Advertise";
 import MobileOffers from "./pages/MobileOffers";
 import DownloadData from "./pages/More/DownloadData";
 import Seller from "./pages/Seller";
+import SellerServices from "./pages/seller/SellerServices";
+import SellerResource from "./pages/seller/SellerResource";
 function App() {
   return (
     <div className="App">
@@ -25,6 +27,8 @@ function App() {
           <Route path="/customerCare" element={<CustomreCare/>} />
           <Route path="/advertise" element={<Advertise/>} />
           <Route path="/mobileOffers" element={<MobileOffers/>} />
+          <Route path="/sellerServices" element={<SellerServices/>} />
+          <Route path="/sellerResource" element={<SellerResource/>} />
         </Routes>
       </BrowserRouter>
     </div>

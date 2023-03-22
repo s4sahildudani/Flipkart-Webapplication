@@ -10,6 +10,7 @@ import {
   TextField,
   Modal,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const style = {
   position: "absolute",
   top: "50%",
@@ -23,9 +24,17 @@ const style = {
 };
 function NavSeller() {
   const [open, setOpen] = React.useState(false);
+  const navigate  = useNavigate();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  return (
+  const  handleService = () =>{
+      navigate("/sellerServices")
+  }
+  const handleResource = () =>{
+
+    navigate("/sellerResource")
+  }
+   return (
     <>
       <AppBar
         position="static"
@@ -44,11 +53,13 @@ function NavSeller() {
                 Fee Structure
               </Typography>
               <Typography
+                 onClick={handleService}
                 sx={{ color: "black", fontSize: "15px", marginLeft: "10%" }}
               >
                 Services
               </Typography>
               <Typography
+               onClick={handleResource}
                 sx={{ color: "black", fontSize: "15px", marginLeft: "10%" }}
               >
                 Resources
