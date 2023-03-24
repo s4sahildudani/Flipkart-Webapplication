@@ -17,7 +17,7 @@ function SellerServices() {
             <Typography sx={{fontSize:"20px"}}>Minimum cost with maximum benefits</Typography>
             </Box>
             <Box sx={{display:"flex" ,justifyContent:"space-between"}}>
-                <Grid item xs={12} sm={4} md={4} lg={4} sx={{marginLeft:"10%"}}>
+                <Grid  item xs={12} sm={4} md={4} lg={4} sx={{marginLeft:"10%"}}>
                 <img src={Flipkartpay} alt=""  />
                 <Typography sx={{fontSize:"20px"}}>Flipkart FullFilment</Typography>
                 <Typography sx={{marginTop:"2%"}}>Flipkart admin | 13th Dec 2019 | 1 minute</Typography>

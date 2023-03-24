@@ -46,7 +46,7 @@ function NavData() {
     setAnchorEl(null);
   };
   const handleNotPrefference = () => {
-    navigate("/notPreference");
+    navigate("/Notpreference");
     setAnchorEl(null);
   };
   const handleAdvertise = () => {

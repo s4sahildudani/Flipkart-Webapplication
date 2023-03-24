@@ -9,9 +9,15 @@ import Card7 from "../images/card7.jpg";
 import Card8 from "../images/card8.jpg";
 import Card9 from "../images/card9.jpg";
 import { Grid, Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import './Card.css';
 import Button from "@mui/material/Button";
 function Card({handleFlightdata ,handleOffers}) {
+  const navigate = useNavigate();
+     
+     function handleMobileData () {
+      navigate("/mobiledata")
+     }
   return (
     <>
       <Grid container>
@@ -25,8 +31,8 @@ function Card({handleFlightdata ,handleOffers}) {
               <img src={Card1} alt="" width="auto" height="60%" />
               <Typography><b>Top Offers</b></Typography>
             </Box>
-            <Box>
-              <img src={Card2} alt="" width="auto" height="60%" />
+            <Box >
+              <img onClick={handleMobileData} src={Card2} alt="" width="auto" height="60%" />
               <Typography><b>Mobile $ Templates</b></Typography>
             </Box>
             <Box>
