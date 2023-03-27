@@ -26,7 +26,18 @@ function AllOffersData() {
           <Toolbar disableGutters>
             <Typography
               onClick={handleClick}
-              sx={{ marginLeft: "3%", fontSize: "1.3rem", color: "black" }}
+              sx={{
+                fontSize: "0.7rem",
+                color: "black",
+                marginLeft: "2%",
+                textAlign:"center",
+                "@media (min-width:600px)": {
+                  fontSize: "1rem",
+                },
+                "@media (min-width:960px)": {
+                  fontSize: "1.2rem ",
+                },
+              }}
             >
               Electronics
             </Typography>
@@ -130,43 +141,132 @@ function AllOffersData() {
             </Menu>
 
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+            sx={{
+              fontSize: "0.7rem",
+              color: "black",
+              marginLeft: "2%",
+              textAlign:"center",
+              "@media (min-width:600px)": {
+                fontSize: "1rem",
+              },
+              "@media (min-width:960px)": {
+                fontSize: "1.2rem ",
+              },
+            }}
+              
             >
               TV's & Appliances
             </Typography>
 
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+             sx={{
+              fontSize: "0.7rem",
+              color: "black",
+              marginLeft: "2%",
+              textAlign:"center",
+              "@media (min-width:600px)": {
+                fontSize: "1rem",
+              },
+              "@media (min-width:960px)": {
+                fontSize: "1.2rem ",
+              },
+            }}
             >
               Men
             </Typography>
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+             sx={{
+              fontSize: "0.7rem",
+              color: "black",
+              marginLeft: "2%",
+              textAlign:"center",
+              "@media (min-width:600px)": {
+                fontSize: "1rem",
+              },
+              "@media (min-width:960px)": {
+                fontSize: "1.2rem ",
+              },
+            }}
             >
               Women
             </Typography>
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+              sx={{
+                fontSize: "0.7rem",
+                color: "black",
+                marginLeft: "2%",
+                textAlign:"center",
+                "@media (min-width:600px)": {
+                  fontSize: "1rem",
+                },
+                "@media (min-width:960px)": {
+                  fontSize: "1.2rem ",
+                },
+              }}
             >
               Baby & Kids
             </Typography>
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+              sx={{
+                fontSize: "0.7rem",
+                color: "black",
+                marginLeft: "2%",
+                textAlign:"center",
+                "@media (min-width:600px)": {
+                  fontSize: "1rem",
+                },
+                "@media (min-width:960px)": {
+                  fontSize: "1.2rem ",
+                },
+              }}
             >
               Home & Furniture
             </Typography>
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+              sx={{
+                fontSize: "0.7rem",
+                color: "black",
+                marginLeft: "2%",
+                textAlign:"center",
+                "@media (min-width:600px)": {
+                  fontSize: "1rem",
+                },
+                "@media (min-width:960px)": {
+                  fontSize: "1.2rem ",
+                },
+              }}
             >
               Sports ,books & More
             </Typography>
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+              sx={{
+                fontSize: "0.7rem",
+                color: "black",
+                marginLeft: "2%",
+                textAlign:"center",
+                "@media (min-width:600px)": {
+                  fontSize: "1rem",
+                },
+                "@media (min-width:960px)": {
+                  fontSize: "1.2rem ",
+                },
+              }}
             >
               Flights
             </Typography>
             <Typography
-              sx={{ marginLeft: "3%", fontSize: "1.2rem", color: "black" }}
+              sx={{
+                fontSize: "0.7rem",
+                color: "black",
+                marginLeft: "2%",
+                textAlign:"center",
+                "@media (min-width:600px)": {
+                  fontSize: "1rem",
+                },
+                "@media (min-width:960px)": {
+                  fontSize: "1.2rem ",
+                },
+              }}
             >
               Offer Zone
             </Typography>

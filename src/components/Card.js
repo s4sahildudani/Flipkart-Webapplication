@@ -23,7 +23,10 @@ function Card({handleFlightdata ,handleOffers}) {
       <Grid container>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Box
-            sx={{ display: "flex", padding: "1%" }}
+            
+            sx={{ display: "flex", padding: "1%","@media (max-width:900px)": {
+              display:"block"
+            }, }}
             justifyContent="space-between"
             flexDirection="row"
           >

@@ -13,6 +13,7 @@ import SellerResource from "./pages/seller/SellerResource";
 import Notidficationpref from "./pages/More/Notidficationpref";
 import Itemsdata from "./pages/Itemsdata";
 import MobileData from "./pages/Mobile/MobileData";
+import Contactus from "./pages/Contactus";
 function App() {
   return (
     <div className="App">
@@ -28,7 +29,7 @@ function App() {
           <Route path="/Notpreference" element={<Notidficationpref />} />
           <Route path="/customerCare" element={<CustomreCare/>} />
           <Route path="/advertise" element={<Advertise/>} />
-         
+          <Route path="/contactus" element={<Contactus />} />
           <Route path="/sellerServices" element={<SellerServices/>} />
           <Route path="/sellerResource" element={<SellerResource/>} />
           <Route path="/itemsdata" element={<Itemsdata />} />

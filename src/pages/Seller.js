@@ -116,7 +116,9 @@ function Seller() {
           </Grid>
         </Grid>
 
-        <Grid sx={{ background: "light-grey", display: "flex", padding: "4%" }}>
+        <Grid sx={{ background: "light-grey", display: "flex", padding: "4%","@media (max-width:900px)": {
+                  display:"block"
+                }, }}>
           <Box sx={{ display: "flex" }}>
             <img src={Chaitanya} alt="" />
             <Box sx={{ padding: "2%" }}>

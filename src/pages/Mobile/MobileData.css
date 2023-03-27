@@ -1,0 +1,16 @@
+@media only screen and (max-width: 850px) {
+    .upcomingSale{
+        font-size: 2px !important;
+        color:red
+      }
+  }
+@media only screen and (max-width: 400px) {
+    .upcomingSale{
+        font-size: 1px !important;
+        color:blue
+      }
+  }
+  .upcomingSale{
+    font-size: 45px !important;
+    text-align: center;
+  }

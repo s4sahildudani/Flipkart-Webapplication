@@ -63,7 +63,7 @@ function NavData() {
   };
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" sx={{marginLeft:"0%" ,marginRight:"0%" ,width:"100%"}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ marginLeft: "13%" }}>
