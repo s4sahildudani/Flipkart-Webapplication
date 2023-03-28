@@ -15,24 +15,39 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Login from "../images/login.jpg";
+import {auth } from '../firebase.conflig';
 // import useMediaQuery from "@mui/material/useMediaQuery";
 // import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 function NavData() {
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorE2, setAnchorE2] = React.useState(null);
   const openMenu = Boolean(anchorEl);
+  const openMenu2 = Boolean(anchorE2);
   // const theme = useTheme();
   // const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
+  
+
+const appVerifier = window.recaptchaVerifier;
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClick2Open = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
   };
   const handleCarts = () => {
     navigate("/cart");
@@ -57,13 +72,55 @@ function NavData() {
     console.log("click");
     setAnchorEl(event.currentTarget);
   };
-  
+
   const handleSeller = () => {
     navigate("/seller");
   };
+
+  function reCaptchaVerify () {
+    if(!window.recaptchaVerifier){
+      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+        'size': 'normal',
+        'callback': (response) => {
+           onSignup()
+        },
+        'expired-callback': () => {
+         
+        }
+      }, auth);
+    }
+  }
+
+  function onSignup() {
+    console.log("call")
+    handleClick2Open()
+    reCaptchaVerify ()
+    const appVerifier = window.recaptchaVerifier 
+    const PhoneNumber = "7066885712"
+    signInWithPhoneNumber(auth,PhoneNumber,  appVerifier)
+    .then((confirmationResult) => {
+      // SMS sent. Prompt user to type the code from the message, then sign the
+      // user in with confirmationResult.confirm(code).
+      window.confirmationResult = confirmationResult;
+      alert("Otp send Successfully")
+      // ...
+    }).catch((error) => {
+      // Error; SMS not sent
+      // ...
+    });
+  }
+
+  function onOtp() {
+    alert("Login Successfully")
+    handleClose2()
+    handleClose()
+  }
   return (
     <div>
-      <AppBar position="static" sx={{marginLeft:"0%" ,marginRight:"0%" ,width:"100%"}}>
+      <AppBar
+        position="static"
+        sx={{ marginLeft: "0%", marginRight: "0%", width: "100%" }}
+      >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ marginLeft: "13%" }}>
@@ -163,6 +220,7 @@ function NavData() {
                   </Grid>
                   <Grid item xs={7} sm={7} md={7} lg={7}>
                     <Box sx={{ padding: "56px 35px 16px" }}>
+                      <div id="recaptcha-container"></div>
                       <TextField
                         sx={{ width: "100%" }}
                         id="standard-basic"
@@ -173,7 +231,8 @@ function NavData() {
                         By continuing, you agree to Flipkart's Terms of Use and
                         Privacy Policy.
                       </Typography>
-                      <Button
+                      <Button 
+                      onClick={onSignup}
                         sx={{
                           background: "rgb(251, 100, 27)",
                           color: "white",
@@ -182,6 +241,74 @@ function NavData() {
                         }}
                       >
                         Request OTP
+                      </Button>
+                      <Dialog
+              open={open2}
+              onClose={handleClose2}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <Grid container textAlign="center">
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "1000px",
+                    height: "530px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Grid item xs={5} sm={5} md={5} lg={5}>
+                    <Box
+                      sx={{
+                        background: "#2874f0",
+                        padding: "20%",
+                        height: "100%",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: "white",
+                          fontSize: "25px",
+                          marginRight: "20%",
+                        }}
+                      >
+                        Login
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          color: "white",
+                          fontSize: "18px",
+                          marginTop: "20%",
+                        }}
+                      >
+                        Get access to your Orders, Wishlist and Recommendations
+                      </Typography>
+                      <img style={{ marginTop: "220px" }} src={Login} alt="" />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={7} sm={7} md={7} lg={7}>
+                    <Box sx={{ padding: "56px 35px 16px" }}>
+                      <div id="recaptcha-container"></div>
+                      <TextField
+                        sx={{ width: "100%" }}
+                        id="standard-basic"
+                        label="EnterOtp"
+                        variant="standard"
+                      />
+                      <Typography sx={{ fontSize: "15px", marginTop: "30px" }}>
+                        By continuing, you agree to Flipkart's Terms of Use and
+                        Privacy Policy.
+                      </Typography>
+                      <Button 
+                        onClick={onOtp}
+                        sx={{
+                          background: "rgb(251, 100, 27)",
+                          color: "white",
+                          width: "100%",
+                          marginTop: "30px",
+                        }}
+                      >
+                        Login
                       </Button>
                       <Box sx={{ display: "flex", marginTop: "220px" }}>
                         <Typography sx={{ color: "#2874f0" }}>
@@ -197,7 +324,24 @@ function NavData() {
               </Grid>
               <Box></Box>
             </Dialog>
-            <Typography onClick={handleSeller} sx={{ marginLeft: "3%", fontSize: "1.3rem" }}>
+                      <Box sx={{ display: "flex", marginTop: "220px" }}>
+                        <Typography sx={{ color: "#2874f0" }}>
+                          New to Flipkart?{" "}
+                        </Typography>
+                        <Typography sx={{ color: "#2874f0" }}>
+                          Create an account
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Grid>
+                </Box>
+              </Grid>
+              <Box></Box>
+            </Dialog>
+            <Typography
+              onClick={handleSeller}
+              sx={{ marginLeft: "3%", fontSize: "1.3rem" }}
+            >
               Become a seller
             </Typography>
             <Typography
@@ -215,8 +359,12 @@ function NavData() {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleNotPrefference}>Notification Perference</MenuItem>
-              <MenuItem onClick={handleCustomerCare}>24 X 7 Customore Care</MenuItem>
+              <MenuItem onClick={handleNotPrefference}>
+                Notification Perference
+              </MenuItem>
+              <MenuItem onClick={handleCustomerCare}>
+                24 X 7 Customore Care
+              </MenuItem>
               <MenuItem onClick={handleAdvertise}>Advertise</MenuItem>
               <MenuItem onClick={handleDownloadApp}>Download App</MenuItem>
             </Menu>
