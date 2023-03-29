@@ -78,25 +78,27 @@ const appVerifier = window.recaptchaVerifier;
   };
 
   function reCaptchaVerify () {
-    if(!window.recaptchaVerifier){
+    
       window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
         'size': 'normal',
-        'callback': (response) => {
+        callback: (response) => {
            onSignup()
         },
         'expired-callback': () => {
          
         }
       }, auth);
-    }
+    
   }
 
-  function onSignup() {
+  function onSignup(event) {
+    event.preventDefault()
     console.log("call")
     handleClick2Open()
     reCaptchaVerify ()
     const appVerifier = window.recaptchaVerifier 
-    const PhoneNumber = "7066885712"
+    const PhoneNumber = "=91 7066885712"
+    debugger
     signInWithPhoneNumber(auth,PhoneNumber,  appVerifier)
     .then((confirmationResult) => {
       // SMS sent. Prompt user to type the code from the message, then sign the

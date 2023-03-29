@@ -10,7 +10,9 @@ import {
   TextField,
   Modal,
 } from "@mui/material";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import {auth } from '../firebase.conflig';
 const style = {
   position: "absolute",
   top: "50%",
@@ -34,6 +36,44 @@ function NavSeller() {
 
     navigate("/sellerResource")
   }
+  const handleSellers = () =>{
+
+    navigate("/sellauth")
+  }
+
+  function reCaptchaVerify () {
+    
+    window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+      'size': 'normal',
+      callback: (response) => {
+         onSignup()
+      },
+      'expired-callback': () => {
+       
+      }
+    }, auth);
+  
+}
+
+function onSignup(event) {
+  event.preventDefault()
+  
+  reCaptchaVerify ()
+  const appVerifier = window.recaptchaVerifier 
+  const PhoneNumber = "=91 7066885712"
+  debugger
+  signInWithPhoneNumber(auth,PhoneNumber,  appVerifier)
+  .then((confirmationResult) => {
+    // SMS sent. Prompt user to type the code from the message, then sign the
+    // user in with confirmationResult.confirm(code).
+    window.confirmationResult = confirmationResult;
+    alert("Otp send Successfully")
+    // ...
+  }).catch((error) => {
+    // Error; SMS not sent
+    // ...
+  });
+}
    return (
     <>
       <AppBar
@@ -77,6 +117,7 @@ function NavSeller() {
             </Box>
             <Box sx={{ display: "flex" }}>
               <Button
+              onClick={handleSellers}
                 sx={{
                   background: "rgb(255, 204, 0)",
                   color: "white",
@@ -133,6 +174,7 @@ function NavSeller() {
                       Register for New Account
                     </Typography>
                     <Button
+                    onClick={onSignup}
                       sx={{
                         marginLeft: "40%",
                         background: "rgb(71, 160, 251)",
