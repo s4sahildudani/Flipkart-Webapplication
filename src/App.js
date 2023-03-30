@@ -15,6 +15,8 @@ import Itemsdata from "./pages/Itemsdata";
 import MobileData from "./pages/Mobile/MobileData";
 import Contactus from "./pages/Contactus";
 import SellAuth from "./pages/SellAuth";
+import AboutUs from "./pages/AboutUs";
+import Carreer from "./pages/Carreer";
 function App() {
   return (
     <div className="App">
@@ -35,6 +37,8 @@ function App() {
           <Route path="/sellerResource" element={<SellerResource/>} />
           <Route path="/itemsdata" element={<Itemsdata />} />
           <Route path="/sellauth" element={<SellAuth />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/carreer" element={<Carreer />} />
         </Routes>
       </BrowserRouter>
     </div>
