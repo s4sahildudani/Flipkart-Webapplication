@@ -17,6 +17,7 @@ import Contactus from "./pages/Contactus";
 import SellAuth from "./pages/SellAuth";
 import AboutUs from "./pages/AboutUs";
 import Carreer from "./pages/Carreer";
+import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <div className="App">
@@ -39,6 +40,7 @@ function App() {
           <Route path="/sellauth" element={<SellAuth />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/carreer" element={<Carreer />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

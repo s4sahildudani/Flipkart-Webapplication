@@ -26,6 +26,8 @@ function SellAuth() {
     gstNo: "",
     books: "",
     categories: "",
+    password:"",
+    confirmPassword:""
   };
 
   const validationSchema = yup.object().shape({
@@ -34,7 +36,8 @@ function SellAuth() {
     categories: yup.string().required("Please Enter Your Categories"),
     gstNo: yup.string().required("Please Enter Your gstNo"),
     books: yup.string().required("Please Enter Your Books"),
-    
+    password: yup.string().required("Please Enter Your Password"),
+    confirmPassword: yup.string().required("Please Enter Your Confirm Password"),
   });
   const handleSubmit = (values) => {
     console.log("values", values);
@@ -257,14 +260,18 @@ function SellAuth() {
                       >
                         Enter Your Password
                       </Typography>
-                      <TextField
+                      <Field
                         sx={{
                           marginRight: "0%",
                           marginTop: "2%",
                           width: "35%",
                         }}
                         label="Password"
+                        name="password"
                       />
+                      <p style={{ color: "red" }}>
+                        <ErrorMessage name="password" />
+                      </p>
                       <Typography
                         sx={{
                           fontSize: "22px",
@@ -274,14 +281,18 @@ function SellAuth() {
                       >
                         Confirm Your Password
                       </Typography>
-                      <TextField
+                      <Field
                         sx={{
                           marginRight: "0%",
                           marginTop: "2%",
                           width: "35%",
                         }}
                         label="Confirm Password"
+                        name="confirmPassword"
                       />
+                      <p style={{ color: "red" }}>
+                        <ErrorMessage name="confirmPassword" />
+                      </p>
                       <br />
                       <Button
                         sx={{
