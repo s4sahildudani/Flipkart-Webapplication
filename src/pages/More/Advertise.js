@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Card, Box, Typography, Button, TextField } from "@mui/material";
+import { Grid,  Box, Typography, Button } from "@mui/material";
 import LoginAdvetise from "../../images/LoginAdvetise.svg";
 import FlipkartAds from "../../images/FlipkartAds.svg";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -7,7 +7,6 @@ import * as yup from "yup";
 function Advertise() {
   const defaultValue = {
     Email: "",
-
     password: "",
   };
 
