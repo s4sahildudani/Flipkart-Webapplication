@@ -19,6 +19,9 @@ import AboutUs from "./pages/AboutUs";
 import Carreer from "./pages/Carreer";
 import Dashboard from "./pages/Dashboard";
 import SellingItems from "./SellingItems";
+import SellShirts from "./pages/SellShirts";
+import SellShoes from "./pages/SellShoes";
+import SellTshirts from "./pages/SellTshirts";
 function App() {
   return (
     <div className="App">
@@ -43,6 +46,9 @@ function App() {
           <Route path="/carreer" element={<Carreer />} />
           <Route path="/sellingItems" element={<SellingItems />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/sellShirts" element={<SellShirts />} />
+          <Route path="/sellShoes" element={<SellShoes />} />
+          <Route path="/sellTshirts" element={<SellTshirts />} />
         </Routes>
       </BrowserRouter>
     </div>
