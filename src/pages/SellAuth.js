@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Typography, Tab, TextField, Button } from "@mui/material";
+import { Grid, Box, Typography, Tab,  Button } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
@@ -15,21 +15,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 function SellAuth() {
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const defaultValue = {
     mobileNumber: "",
     Email: "",
     gstNo: "",
     books: "",
     categories: "",
-    password:"",
-    confirmPassword:""
+    password: "",
+    confirmPassword: "",
   };
-
   const validationSchema = yup.object().shape({
     mobileNumber: yup.string().required("Please Enter Your Mobile Number"),
     Email: yup.string().required("Please Enter Your Email"),
@@ -37,7 +34,9 @@ function SellAuth() {
     gstNo: yup.string().required("Please Enter Your gstNo"),
     books: yup.string().required("Please Enter Your Books"),
     password: yup.string().required("Please Enter Your Password"),
-    confirmPassword: yup.string().required("Please Enter Your Confirm Password"),
+    confirmPassword: yup
+      .string()
+      .required("Please Enter Your Confirm Password"),
   });
   const handleSubmit = (values) => {
     console.log("values", values);
@@ -100,11 +99,12 @@ function SellAuth() {
                         name="categories"
                         sx={{ marginRight: "0%", marginTop: "2%" }}
                         placeholder="All Categories"
-                      /><br />
+                      />
+                      <br />
                       <p style={{ color: "red" }}>
                         <ErrorMessage name="categories" />
                       </p>
-                      
+
                       <Field
                         name="books"
                         sx={{
@@ -303,7 +303,7 @@ function SellAuth() {
                         }}
                       >
                         Submit
-                      </Button>
+                      </Button> 
                     </Box>
                   </TabPanel>
                   <TabPanel value="3">Item Three</TabPanel>
@@ -316,5 +316,4 @@ function SellAuth() {
     </>
   );
 }
-
 export default SellAuth;

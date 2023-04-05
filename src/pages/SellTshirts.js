@@ -1,4 +1,4 @@
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Grid,
   Box,
@@ -21,9 +21,9 @@ function SellTshirts() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  const SubmitData =() =>{
-    console.log("Values")
-  }
+  const SubmitData = () => {
+    console.log("Values");
+  };
   const [image, setImage] = useState(null);
   const [imageList, setImageList] = useState([]);
   const imageListRef = ref(storage, "/images");
@@ -160,12 +160,12 @@ function SellTshirts() {
                     Enter Your Brand Image
                   </Typography>
                   <input
-              type="file"
-              onChange={(event) => {
-                setImage(event.target.files[0]);
-              }}
-            />
-            <Button onClick={uploadImage}>Upload Image</Button>
+                    type="file"
+                    onChange={(event) => {
+                      setImage(event.target.files[0]);
+                    }}
+                  />
+                  <Button onClick={uploadImage}>Upload Image</Button>
                   <Typography sx={{ marginTop: "3%" }}>
                     Enter Your Brand Price
                   </Typography>
@@ -174,7 +174,7 @@ function SellTshirts() {
                     Enter Your Size
                   </Typography>
                   <TextField />
-                  <Box sx={{ minWidth: "30%" ,marginTop: "4%" }}>
+                  <Box sx={{ minWidth: "30%", marginTop: "4%" }}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Age</InputLabel>
                       <Select
@@ -188,7 +188,14 @@ function SellTshirts() {
                         <MenuItem value={20}>XL</MenuItem>
                         <MenuItem value={30}>XXl</MenuItem>
                       </Select>
-                      <Button sx={{backgroundColor:"blue" ,color:"white" ,marginTop:"3%"}} onClick={SubmitData}>
+                      <Button
+                        sx={{
+                          backgroundColor: "blue",
+                          color: "white",
+                          marginTop: "3%",
+                        }}
+                        onClick={SubmitData}
+                      >
                         Submit
                       </Button>
                     </FormControl>

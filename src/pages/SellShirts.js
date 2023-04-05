@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Box, Typography, Card } from "@mui/material";
-function sellShirts() {
+function SellShirts() {
   return (
     <>
       <Grid container>
@@ -148,4 +148,4 @@ function sellShirts() {
   );
 }
 
-export default sellShirts;
+export default SellShirts;
