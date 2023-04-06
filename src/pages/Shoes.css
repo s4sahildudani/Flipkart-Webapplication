@@ -1,0 +1,39 @@
+#gender-list {
+  display: none;
+}
+
+#gender-list.show {
+  display: block;
+}
+.Data {
+  margin-top: "4.5%";
+  vertical-align: "middle";
+  font-size: "14px";
+  padding-left: "var(--checkbox-label-margin-left)";
+  color: "var(--color-grey-grade5)";
+  display: "inline-block";
+  width: "calc(100% - var(--checkbox-side) - var(--checkbox-label-margin-left))";
+  white-space: "nowrap";
+  overflow: "hidden";
+  text-overflow: "ellipsis";
+  line-height: "1";
+  cursor: "pointer";
+}
+.moreScroll {
+  font-size: "15px";
+  font-weight: "500";
+  color: "#2874f0";
+  text-transform: "uppercase";
+  cursor: "pointer";
+  margin-left: "1%";
+}
+@media screen and (max-width: 480px) {
+  .Data {
+    font-size: 12px;
+    padding: 10px;
+  }
+  
+  .moreScroll {
+    display: none;
+  }
+}
