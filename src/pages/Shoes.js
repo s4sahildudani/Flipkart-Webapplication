@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Grid,
   Card,
@@ -24,6 +24,11 @@ import Shoes5 from "../images/Shoes5.webp";
 import Shoes6 from "../images/Shoes6.webp";
 import Shoes7 from "../images/Shoes7.webp";
 import Shoes8 from "../images/Shoes8.webp";
+const initialFilters = [
+  { id: 1, name: "Plus (FAssured)" },
+  { id: 2, name: "River" },
+  { id: 3, name: "Unknown" },
+];
 function Shoes() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBrand, setIsOpenBrand] = useState(false);
@@ -36,12 +41,24 @@ function Shoes() {
   const [isOpenRatings, setIsOpenRatings] = useState(false);
   const [isOpenOffers, setIsOpenOffers] = useState(false);
   const [isOpenAvailable, setIsOpenAvailable] = useState(false);
-  const [age, setAge] = useState("");
-  const [Amount, setAmount] = useState("");
+  // const [age, setAge] = useState("");
+  // const [Amount, setAmount] = useState("");
+  const [filters, setFilters] = useState(initialFilters);
 
-  const [open, setOpen] = useState(false);
-  const [openAmount, setOpenAmount] = useState(false);
+  // const [open, setOpen] = useState(false);
+  // const [openAmount, setOpenAmount] = useState(false);
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(3500);
+  const sliderRef = useRef(null);
+  const handleMinValueChange = (event) => {
+    setMinValue(event.target.value);
+    // Update slider value
+    sliderRef.current.value = event.target.value;
+  };
 
+  const handleMaxValueChange = (event) => {
+    setMaxValue(event.target.value);
+  };
   const toggle = () => {
     setIsOpen(!isOpen);
   };
@@ -75,65 +92,101 @@ function Shoes() {
   const toggleAvailable = () => {
     setIsOpenAvailable(!isOpenAvailable);
   };
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  // const handleChange = (event) => {
+  //   setAge(event.target.value);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleChangeAmount = (event) => {
+  //   setAmount(event.target.value);
+  // };
+
+  // const handleCloseAmount = () => {
+  //   setOpenAmount(false);
+  // };
+
+  // const handleOpenAmount = () => {
+  //   setOpenAmount(true);
+  // };
+
+  const handleClearAll = () => {
+    const newFilters = filters.slice();
+    newFilters.splice(0, 3);
+    setFilters(newFilters);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleChangeAmount = (event) => {
-    setAmount(event.target.value);
-  };
-
-  const handleCloseAmount = () => {
-    setOpenAmount(false);
-  };
-
-  const handleOpenAmount = () => {
-    setOpenAmount(true);
-  };
   return (
     <Grid container>
-      <Grid item xs={12} sm={12} md={12} lg={12} sx={{ display: "flex"  }}>
+      <Grid item xs={12} sm={12} md={12} lg={12} sx={{ display: "flex" }}>
         <Grid item xs={2} sm={2} md={2} lg={2} sx={{ justifyContent: "left" }}>
           <Card sx={{ padding: "4%" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography
+            <Box sx={{ marginBottom: "3%" }}>
+              <Box
                 sx={{
-                  color: "#212121",
-                  fontSize: "18px",
-                  textTransform: "capitalize",
-                  width: "67%",
-                  fontWeight: "500",
-                  marginLeft: "1%",
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}
               >
-                <b>Filters</b>
-              </Typography>
-              <Typography
-                sx={{
-                  cursor: "pointer",
-                  color: "#2874f0",
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  fontWeight: "500",
-                  fontFamily: "Roboto,Arial,sans-serif",
-                }}
-              >
-                <b>Clear All</b>
-              </Typography>
+                <Typography
+                  sx={{
+                    color: "#212121",
+                    fontSize: "18px",
+                    textTransform: "capitalize",
+                    width: "67%",
+                    fontWeight: "500",
+                    marginLeft: "1%",
+                  }}
+                >
+                  <b>Filters</b>
+                </Typography>
+                <Typography
+                  sx={{
+                    cursor: "pointer",
+                    color: "#2874f0",
+                    fontSize: "12px",
+                    textTransform: "uppercase",
+                    fontWeight: "500",
+                    fontFamily: "Roboto,Arial,sans-serif",
+                  }}
+                  onClick={handleClearAll}
+                >
+                  <b>Clear All</b>
+                </Typography>
+              </Box>
+
+              <Box sx={{ marginTop: "3%" }}>
+                {filters.map((filter) => (
+                  <div
+                    key={filter.id}
+                    className="filter"
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "12px",
+                      backgroundColor: "#e0e0e0",
+                      boxShadow: "0 2px 4px 0 hsla(0,0%,100%,.5)",
+                      borderRadius: "3px",
+                      margin: " 2px 4px",
+                      overflow: "hidden",
+                      transition: "background-color .1s",
+                      maxWidth: "150px",
+                      padding: "8px",
+                      display: "flex",
+                    }}
+                  >
+                    <CloseIcon />
+                    <Typography>{filter.name}</Typography>
+                  </div>
+                ))}
+              </Box>
             </Box>
-            <Box sx={{ marginTop: "3%" }}>
+
+            {/* <Box sx={{ marginTop: "3%" }}>
               <div
                 style={{
                   cursor: "pointer",
@@ -187,11 +240,9 @@ function Shoes() {
               >
                 <CloseIcon /> <Typography>KILLER</Typography>
               </div>
-            </Box>
+            </Box> */}
             <Box>
-              <Typography
-                 className="moreScroll"
-              >
+              <Typography className="moreScroll">
                 <b>Show More</b>
               </Typography>
             </Box>
@@ -280,9 +331,14 @@ function Shoes() {
                 </Typography>
                 <Box>
                   <Slider
-                    sx={{ marginLeft: "4%", width: "90%" }}
-                    defaultValue={0}
-                    aria-label="Default"
+                    ref={sliderRef}
+                    value={[minValue, maxValue]}
+                    min={500}
+                    max={3500}
+                    onChange={(event, newValue) => {
+                      setMinValue(newValue[0]);
+                      setMaxValue(newValue[1]);
+                    }}
                     valueLabelDisplay="auto"
                   />
                 </Box>
@@ -297,16 +353,17 @@ function Shoes() {
                     <Select
                       labelId="demo-controlled-open-select-label"
                       id="demo-controlled-open-select"
-                      open={open}
-                      onClose={handleClose}
-                      onOpen={handleOpen}
-                      value={age}
-                      label="Age"
-                      onChange={handleChange}
+                      value={minValue}
+                      label="Min"
+                      onChange={handleMinValueChange}
                     >
-                      <MenuItem value={10}>500</MenuItem>
-                      <MenuItem value={20}>1000</MenuItem>
-                      <MenuItem value={30}>1500</MenuItem>
+                      <MenuItem value={500}>₹500</MenuItem>
+                      <MenuItem value={1000}>₹1000</MenuItem>
+                      <MenuItem value={1500}>₹1500</MenuItem>
+                      <MenuItem value={2000}>₹2000</MenuItem>
+                      <MenuItem value={2500}>₹2500</MenuItem>
+                      <MenuItem value={3000}>₹3000</MenuItem>
+                      <MenuItem value={3500}>₹3500</MenuItem>
                     </Select>
                   </FormControl>
                   <Typography sx={{ marginTop: "2%", fontWeight: "300" }}>
@@ -317,29 +374,27 @@ function Shoes() {
                     size="small"
                   >
                     <InputLabel id="demo-controlled-open-select-label">
-                      ₹3500
+                      Max
                     </InputLabel>
                     <Select
                       labelId="demo-controlled-open-select-label"
                       id="demo-controlled-open-select"
-                      open={openAmount}
-                      onClose={handleCloseAmount}
-                      onOpen={handleOpenAmount}
-                      value={Amount}
-                      label="₹3500"
-                      onChange={handleChangeAmount}
+                      value={maxValue}
+                      label="Max"
+                      onChange={handleMaxValueChange}
                     >
-                      <MenuItem value={10}>₹500</MenuItem>
-                      <MenuItem value={20}>₹1000</MenuItem>
-                      <MenuItem value={30}>₹1500</MenuItem>
-                      <MenuItem value={20}>₹2000</MenuItem>
-                      <MenuItem value={30}>₹2500</MenuItem>
-                      <MenuItem value={20}>₹3000</MenuItem>
-                      <MenuItem value={30}>₹3500</MenuItem>
+                      <MenuItem value={500}>₹500</MenuItem>
+                      <MenuItem value={1000}>₹1000</MenuItem>
+                      <MenuItem value={1500}>₹1500</MenuItem>
+                      <MenuItem value={2000}>₹2000</MenuItem>
+                      <MenuItem value={2500}>₹2500</MenuItem>
+                      <MenuItem value={3000}>₹3000</MenuItem>
+                      <MenuItem value={3500}>₹3500</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
               </Box>
+
               <hr style={{ marginTop: "7%" }} />
               <Box sx={{ display: "flex", marginTop: "4%" }}>
                 <Checkbox />
@@ -822,7 +877,7 @@ function Shoes() {
             </Box>
           </Card>
         </Grid>
-        <Grid item xs={10} sm={10} md={10} lg={10} sx={{padding:"1%"}}>
+        <Grid item xs={10} sm={10} md={10} lg={10} sx={{ padding: "1%" }}>
           <Box>
             <Box sx={{ display: "flex" }}>
               <Typography>HOME</Typography>
@@ -899,7 +954,7 @@ function Shoes() {
               </Card>
               <Card sx={{ width: "24%" }}>
                 {" "}
-                <img src={Shoes8} alt=""width="80%" height="70%" />
+                <img src={Shoes8} alt="" width="80%" height="70%" />
                 <Typography sx={{ marginTop: "4%" }}>SCATCHITE</Typography>
                 <Typography>Casuals for Men</Typography>
                 <Typography>164</Typography>

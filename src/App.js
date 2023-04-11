@@ -20,6 +20,7 @@ import Carreer from "./pages/Carreer";
 import Dashboard from "./pages/Dashboard";
 import SellingItems from "./SellingItems";
 import Shoes from "./pages/Shoes";
+import AddProducts from "./pages/AddProducts";
 
 function App() {
   return (
@@ -34,18 +35,19 @@ function App() {
           <Route path="/seller" element={<Seller />} />
           <Route path="/downloadData" element={<DownloadData />} />
           <Route path="/Notpreference" element={<Notidficationpref />} />
-          <Route path="/customerCare" element={<CustomreCare/>} />
-          <Route path="/advertise" element={<Advertise/>} />
+          <Route path="/customerCare" element={<CustomreCare />} />
+          <Route path="/advertise" element={<Advertise />} />
           <Route path="/contactus" element={<Contactus />} />
-          <Route path="/sellerServices" element={<SellerServices/>} />
-          <Route path="/sellerResource" element={<SellerResource/>} />
+          <Route path="/sellerServices" element={<SellerServices />} />
+          <Route path="/sellerResource" element={<SellerResource />} />
           <Route path="/itemsdata" element={<Itemsdata />} />
           <Route path="/sellauth" element={<SellAuth />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/carreer" element={<Carreer />} />
           <Route path="/sellingItems" element={<SellingItems />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/shoes" element={<Shoes/>} />
+          <Route path="/shoes" element={<Shoes />} />
+          <Route path="/addproducts" element={<AddProducts />} />
         </Routes>
       </BrowserRouter>
     </div>

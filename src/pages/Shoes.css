@@ -18,6 +18,7 @@
   text-overflow: "ellipsis";
   line-height: "1";
   cursor: "pointer";
+  margin-top:"3% !important"
 }
 .moreScroll {
   font-size: "15px";
