@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Grid, Box, Typography, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {db,storage} from '../firebase.conflig';
+
 function AddProducts() {
   const [productName, setProductName] = useState("");
   const [productDesc, setProductDesc] = useState("");
@@ -11,7 +13,9 @@ function AddProducts() {
   const [imageError, setImageError] = useState("");
   const [updateError, setupdateError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-   const types = ['image/jpg' ,'image/jpeg' ,'image/png' ,'image/PNG'];
+  const navigate = useNavigate();
+  const types = ['image/jpg' ,'image/jpeg' ,'image/png' ,'image/PNG'];
+
   function handleProductImage(event) {
     let selectedFiles = event.target.files[0];
     if(selectedFiles){
@@ -28,37 +32,42 @@ function AddProducts() {
       console.log("Please select Your file");
     }
   }
+
   function handleAddProducts (event) {
     event.preventDefault();
-    // console.log(productBrand,productColor,productName,productSize,productDesc);
-    // console.log(productImage);
-    const uploadTask = storage.ref(`product-images/${productImage.name}`).put(productImage);
-
-    uploadTask.on('state-Changed',snapshot =>{
-      const progress = (snapshot.bytesTransferred/snapshot.totalBytes)*100
-      console.log(progress)
-    },error => setupdateError(error.message,()=>{
-      storage.ref('product-images').child(productImage.name).getDownloadURL().then(url=>{
-        db.collections('Products').add({
-          productBrand,
-          productColor,productDesc,productSize,url
-        }).then(() =>{
-          setSuccessMsg("Product Added Successfully");
-          setProductBrand("");
-          setProductColor("");
-          setProductDesc("");
-          setProductSize("");
-          document.getElementById('file').value="";
-          setImageError('');
-          setupdateError('');
-          setTimeout(()=>{
-            setSuccessMsg('')
-          },3000)
-        }).catch(error=>setupdateError(error.message))
+    if (productImage) {
+      const uploadTask = storage.ref(`product-images/${productImage.name}`).put(productImage);
+      uploadTask.on('state_changed', snapshot => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Progress", progress);
+      }, error => setupdateError(error.message),()=>{
+        storage.ref('product-images').child(productImage.name).getDownloadURL().then(url=>{
+          console.log("url",url,productImage,productName)
+          db.collection('Products').add({
+            productBrand,productSize,productColor,productDesc,url
+          }).then(()=>{
+            setSuccessMsg("Product Added Successfully");
+            navigate("/userProducts")
+            setProductBrand('');
+            setProductColor('');
+            setProductDesc('');
+            setProductSize('');
+            setProductImage(null);
+            document.getElementById('file').value="";
+            setImageError('');
+            setupdateError('');
+            setTimeout(()=>{
+              setSuccessMsg('')
+            },3000)
+          }).catch(error=>setupdateError(error.message))
+        })
       })
-    })
-    )
+    }
+    else {
+      setupdateError("Please select an image for the product.")
+    }
   }
+  
   return (
     <>
       <Grid container>
@@ -74,6 +83,7 @@ function AddProducts() {
             <Typography variant="h3">Add Product</Typography>
             <Typography>Add Name</Typography>
             <TextField
+            sx={{width:"70%"}}
               value={productName}
               onChange={(event) => {
                 setProductName(event.target.value);
@@ -82,6 +92,7 @@ function AddProducts() {
             />
             <Typography>Add Description</Typography>
             <TextField
+            sx={{width:"70%"}}
               value={productDesc}
               onChange={(event) => {
                 setProductDesc(event.target.value);
@@ -90,6 +101,7 @@ function AddProducts() {
             />
             <Typography>Add Brand</Typography>
             <TextField
+            sx={{width:"70%"}}
               value={productBrand}
               onChange={(event) => {
                 setProductBrand(event.target.value);
@@ -98,6 +110,7 @@ function AddProducts() {
             />
             <Typography>Add Size</Typography>
             <TextField
+            sx={{width:"70%"}}
               value={productSize}
               onChange={(event) => {
                 setProductSize(event.target.value);
@@ -106,6 +119,7 @@ function AddProducts() {
             />
             <Typography>Add Color</Typography>
             <TextField
+            sx={{width:"70%"}}
               value={productColor}
               onChange={(event) => {
                 setProductColor(event.target.value);
@@ -121,7 +135,7 @@ function AddProducts() {
               </Grid>
             </>}
             <br />
-            <Button type="submit" sx={{ background: "blue", color: "white" }}>Login</Button>
+            <Button type="submit" sx={{ background: "blue", color: "white" }}>Submit</Button>
             <br /><br />
             {updateError &&<>
               <Grid>

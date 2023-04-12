@@ -21,6 +21,7 @@ import Dashboard from "./pages/Dashboard";
 import SellingItems from "./SellingItems";
 import Shoes from "./pages/Shoes";
 import AddProducts from "./pages/AddProducts";
+import UserProducts from "./pages/UserProducts";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/sellingItems" element={<SellingItems />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/shoes" element={<Shoes />} />
+          <Route path="/userproducts" element={<UserProducts />} />
           <Route path="/addproducts" element={<AddProducts />} />
         </Routes>
       </BrowserRouter>
