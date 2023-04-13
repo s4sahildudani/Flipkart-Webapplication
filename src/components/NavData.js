@@ -15,26 +15,25 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Login from "../images/login.jpg";
-import {auth } from '../firebase.conflig';
-// import useMediaQuery from "@mui/material/useMediaQuery";
-// import { useTheme } from "@mui/material/styles";
+import firebase from "../firebase.conflig";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 function NavData() {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const openMenu = Boolean(anchorEl);
   const openMenu2 = Boolean(anchorE2);
-  // const theme = useTheme();
-  // const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const navigate = useNavigate();
-  
 
-const appVerifier = window.recaptchaVerifier;
+  const navigate = useNavigate();
+
+  // const appVerifier = window.recaptchaVerifier;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -77,46 +76,66 @@ const appVerifier = window.recaptchaVerifier;
     navigate("/seller");
   };
 
-  function reCaptchaVerify () {
-    
-      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-        'size': 'normal',
+  function reCaptchaVerify() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      "sign-in-button",
+      {
+        size: "invisible",
         callback: (response) => {
-           onSignup()
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          onSignInSubmit();
         },
-        'expired-callback': () => {
-         
-        }
-      }, auth);
-    
+        defaultCountry: "IN",
+      }
+    );
   }
 
-  function onSignup(event) {
-    event.preventDefault()
-    console.log("call")
-    handleClick2Open()
-    reCaptchaVerify ()
-    const appVerifier = window.recaptchaVerifier 
-    const PhoneNumber = "=91 7066885712"
-    debugger
-    signInWithPhoneNumber(auth,PhoneNumber,  appVerifier)
-    .then((confirmationResult) => {
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      window.confirmationResult = confirmationResult;
-      alert("Otp send Successfully")
-      // ...
-    }).catch((error) => {
-      // Error; SMS not sent
-      // ...
-    });
+  function onSignInSubmit(event) {
+    event.preventDefault();
+    const phoneNumber = "+91" + phone;
+    console.log("phoneNumber", phone);
+    reCaptchaVerify();
+    const appVerifier = window.recaptchaVerifier;
+    firebase
+      .auth()
+      .signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        window.confirmationResult = confirmationResult;
+        console.log("OTP sent Successfully");
+        handleClick2Open();
+        // ...
+      })
+      .catch((error) => {
+        // Error; SMS not sent
+        // ...
+        console.log("SMS not sent");
+      });
+  }
+  function onSubmitOTP(event) {
+    event.preventDefault();
+    const code = otp;
+    console.log("code", code);
+    window.confirmationResult
+      .confirm(code)
+      .then((result) => {
+        // User signed in successfully.
+        const user = result.user;
+        console.log("useruid",user.uid);
+        console.log(JSON.stringify(user));
+        alert("User is verified Successfully");
+        setLoggedIn(true);
+        handleClose2();
+        handleClose();
+        // ...
+      })
+      .catch((error) => {
+        // User couldn't sign in (bad verification code?)
+        // ...
+      });
   }
 
-  function onOtp() {
-    alert("Login Successfully")
-    handleClose2()
-    handleClose()
-  }
   return (
     <div>
       <AppBar
@@ -169,177 +188,207 @@ const appVerifier = window.recaptchaVerifier;
             </Paper>
             <Button
               onClick={handleClickOpen}
-              sx={{
+              
+            >
+              {loggedIn ? <p style={{color:"white"}}>My Account</p> : <Button sx={{
                 background: "white",
                 color: "blue",
-              }}
-            >
-              Login
+              }}>Login</Button>}
             </Button>
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="responsive-dialog-title"
-            >
-              <Grid container textAlign="center">
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "1000px",
-                    height: "530px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Grid item xs={5} sm={5} md={5} lg={5}>
-                    <Box
-                      sx={{
-                        background: "#2874f0",
-                        padding: "20%",
-                        height: "100%",
-                      }}
-                    >
-                      <Typography
+            <form>
+              <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="responsive-dialog-title"
+              >
+                <Grid container textAlign="center">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "1000px",
+                      height: "530px",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Grid item xs={5} sm={5} md={5} lg={5}>
+                      <Box
                         sx={{
-                          color: "white",
-                          fontSize: "25px",
-                          marginRight: "20%",
+                          background: "#2874f0",
+                          padding: "20%",
+                          height: "100%",
                         }}
                       >
-                        Login
-                      </Typography>
+                        <Typography
+                          sx={{
+                            color: "white",
+                            fontSize: "25px",
+                            marginRight: "20%",
+                          }}
+                        >
+                          Login
+                        </Typography>
 
-                      <Typography
-                        sx={{
-                          color: "white",
-                          fontSize: "18px",
-                          marginTop: "20%",
-                        }}
-                      >
-                        Get access to your Orders, Wishlist and Recommendations
-                      </Typography>
-                      <img style={{ marginTop: "220px" }} src={Login} alt="" />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7} sm={7} md={7} lg={7}>
-                    <Box sx={{ padding: "56px 35px 16px" }}>
-                      <div id="recaptcha-container"></div>
-                      <TextField
-                        sx={{ width: "100%" }}
-                        id="standard-basic"
-                        label="Enter Email/Mobile Number"
-                        variant="standard"
-                      />
-                      <Typography sx={{ fontSize: "15px", marginTop: "30px" }}>
-                        By continuing, you agree to Flipkart's Terms of Use and
-                        Privacy Policy.
-                      </Typography>
-                      <Button 
-                      onClick={onSignup}
-                        sx={{
-                          background: "rgb(251, 100, 27)",
-                          color: "white",
-                          width: "100%",
-                          marginTop: "30px",
-                        }}
-                      >
-                        Request OTP
-                      </Button>
-                      <Dialog
-              open={open2}
-              onClose={handleClose2}
-              aria-labelledby="responsive-dialog-title"
-            >
-              <Grid container textAlign="center">
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "1000px",
-                    height: "530px",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Grid item xs={5} sm={5} md={5} lg={5}>
-                    <Box
-                      sx={{
-                        background: "#2874f0",
-                        padding: "20%",
-                        height: "100%",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          color: "white",
-                          fontSize: "25px",
-                          marginRight: "20%",
-                        }}
-                      >
-                        Login
-                      </Typography>
+                        <Typography
+                          sx={{
+                            color: "white",
+                            fontSize: "18px",
+                            marginTop: "20%",
+                          }}
+                        >
+                          Get access to your Orders, Wishlist and
+                          Recommendations
+                        </Typography>
+                        <img
+                          style={{ marginTop: "220px" }}
+                          src={Login}
+                          alt=""
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={7} sm={7} md={7} lg={7}>
+                      <Box sx={{ padding: "56px 35px 16px" }}>
+                        <div id="recaptcha-container"></div>
+                        <TextField
+                          sx={{ width: "100%" }}
+                          id="standard-basic"
+                          label="Enter Email/Mobile Number"
+                          variant="standard"
+                          name="phone"
+                          onChange={(event) => {
+                            setPhone(event.target.value);
+                          }}
+                        />
+                        <Typography
+                          sx={{ fontSize: "15px", marginTop: "30px" }}
+                        >
+                          By continuing, you agree to Flipkart's Terms of Use
+                          and Privacy Policy.
+                        </Typography>
+                        <Button
+                          id="sign-in-button"
+                          type="submit"
+                          onClick={onSignInSubmit}
+                          // onClick={onSignup}
+                          sx={{
+                            background: "rgb(251, 100, 27)",
+                            color: "white",
+                            width: "100%",
+                            marginTop: "30px",
+                          }}
+                        >
+                          Request OTP
+                        </Button>
+                        <Dialog
+                          open={open2}
+                          onClose={handleClose2}
+                          aria-labelledby="responsive-dialog-title"
+                        >
+                          <Grid container textAlign="center">
+                            <Box
+                              sx={{
+                                display: "flex",
+                                width: "1000px",
+                                height: "530px",
+                                overflow: "hidden",
+                              }}
+                            >
+                              <Grid item xs={5} sm={5} md={5} lg={5}>
+                                <Box
+                                  sx={{
+                                    background: "#2874f0",
+                                    padding: "20%",
+                                    height: "100%",
+                                  }}
+                                >
+                                  <Typography
+                                    sx={{
+                                      color: "white",
+                                      fontSize: "25px",
+                                      marginRight: "20%",
+                                    }}
+                                  >
+                                    Login
+                                  </Typography>
 
-                      <Typography
-                        sx={{
-                          color: "white",
-                          fontSize: "18px",
-                          marginTop: "20%",
-                        }}
-                      >
-                        Get access to your Orders, Wishlist and Recommendations
-                      </Typography>
-                      <img style={{ marginTop: "220px" }} src={Login} alt="" />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={7} sm={7} md={7} lg={7}>
-                    <Box sx={{ padding: "56px 35px 16px" }}>
-                      <div id="recaptcha-container"></div>
-                      <TextField
-                        sx={{ width: "100%" }}
-                        id="standard-basic"
-                        label="EnterOtp"
-                        variant="standard"
-                      />
-                      <Typography sx={{ fontSize: "15px", marginTop: "30px" }}>
-                        By continuing, you agree to Flipkart's Terms of Use and
-                        Privacy Policy.
-                      </Typography>
-                      <Button 
-                        onClick={onOtp}
-                        sx={{
-                          background: "rgb(251, 100, 27)",
-                          color: "white",
-                          width: "100%",
-                          marginTop: "30px",
-                        }}
-                      >
-                        Login
-                      </Button>
-                      <Box sx={{ display: "flex", marginTop: "220px" }}>
-                        <Typography sx={{ color: "#2874f0" }}>
-                          New to Flipkart?{" "}
-                        </Typography>
-                        <Typography sx={{ color: "#2874f0" }}>
-                          Create an account
-                        </Typography>
+                                  <Typography
+                                    sx={{
+                                      color: "white",
+                                      fontSize: "18px",
+                                      marginTop: "20%",
+                                    }}
+                                  >
+                                    Get access to your Orders, Wishlist and
+                                    Recommendations
+                                  </Typography>
+                                  <img
+                                    style={{ marginTop: "220px" }}
+                                    src={Login}
+                                    alt=""
+                                  />
+                                </Box>
+                              </Grid>
+                              <Grid item xs={7} sm={7} md={7} lg={7}>
+                                <Box sx={{ padding: "56px 35px 16px" }}>
+                                  <div id="recaptcha-container"></div>
+                                  <TextField
+                                    sx={{ width: "100%" }}
+                                    id="standard-basic"
+                                    label="EnterOtp"
+                                    variant="standard"
+                                    name="otp"
+                                    onChange={(event) => {
+                                      setOtp(event.target.value);
+                                    }}
+                                  />
+                                  <Typography
+                                    sx={{ fontSize: "15px", marginTop: "30px" }}
+                                  >
+                                    By continuing, you agree to Flipkart's Terms
+                                    of Use and Privacy Policy.
+                                  </Typography>
+                                  <Button
+                                    onClick={onSubmitOTP}
+                                    sx={{
+                                      background: "rgb(251, 100, 27)",
+                                      color: "white",
+                                      width: "100%",
+                                      marginTop: "30px",
+                                    }}
+                                  >
+                                    Login
+                                  </Button>
+
+                                  <Box
+                                    sx={{ display: "flex", marginTop: "220px" }}
+                                  >
+                                    <Typography sx={{ color: "#2874f0" }}>
+                                      New to Flipkart?{" "}
+                                    </Typography>
+                                    <Typography sx={{ color: "#2874f0" }}>
+                                      Create an account
+                                    </Typography>
+                                  </Box>
+                                </Box>
+                              </Grid>
+                            </Box>
+                          </Grid>
+                          <Box></Box>
+                        </Dialog>
+                        <Box sx={{ display: "flex", marginTop: "220px" }}>
+                          <Typography sx={{ color: "#2874f0" }}>
+                            New to Flipkart?{" "}
+                          </Typography>
+                          <Typography sx={{ color: "#2874f0" }}>
+                            Create an account
+                          </Typography>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Grid>
-                </Box>
-              </Grid>
-              <Box></Box>
-            </Dialog>
-                      <Box sx={{ display: "flex", marginTop: "220px" }}>
-                        <Typography sx={{ color: "#2874f0" }}>
-                          New to Flipkart?{" "}
-                        </Typography>
-                        <Typography sx={{ color: "#2874f0" }}>
-                          Create an account
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Grid>
-                </Box>
-              </Grid>
-              <Box></Box>
-            </Dialog>
+                    </Grid>
+                  </Box>
+                </Grid>
+                <Box></Box>
+              </Dialog>
+            </form>
             <Typography
               onClick={handleSeller}
               sx={{ marginLeft: "3%", fontSize: "1.3rem" }}

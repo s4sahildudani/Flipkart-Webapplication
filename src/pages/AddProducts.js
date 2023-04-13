@@ -8,6 +8,7 @@ function AddProducts() {
   const [productDesc, setProductDesc] = useState("");
   const [productSize, setProductSize] = useState("");
   const [productBrand, setProductBrand] = useState("");
+  const [productPrice, setProductPrice] = useState("");
   const [productImage, setProductImage] = useState(null);
   const [productColor, setProductColor] = useState("");
   const [imageError, setImageError] = useState("");
@@ -44,7 +45,7 @@ function AddProducts() {
         storage.ref('product-images').child(productImage.name).getDownloadURL().then(url=>{
           console.log("url",url,productImage,productName)
           db.collection('Products').add({
-            productBrand,productSize,productColor,productDesc,url
+            productBrand,productSize,productColor,productDesc,productPrice,url
           }).then(()=>{
             setSuccessMsg("Product Added Successfully");
             navigate("/userProducts")
@@ -52,6 +53,7 @@ function AddProducts() {
             setProductColor('');
             setProductDesc('');
             setProductSize('');
+            setProductPrice('');
             setProductImage(null);
             document.getElementById('file').value="";
             setImageError('');
@@ -114,6 +116,15 @@ function AddProducts() {
               value={productSize}
               onChange={(event) => {
                 setProductSize(event.target.value);
+              }}
+              label="Enter Your Product Size"
+            />
+               <Typography>Add Price</Typography>
+            <TextField
+            sx={{width:"70%"}}
+              value={productPrice}
+              onChange={(event) => {
+                setProductPrice(event.target.value);
               }}
               label="Enter Your Product Size"
             />
