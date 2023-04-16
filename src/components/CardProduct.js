@@ -1,12 +1,11 @@
 import React from 'react';
-import { Grid ,Card ,Box,Typography} from '@mui/material'
 import IndividualCartProduct from './IndividualCartProduct'
 
 function CardProduct({cartProducts}) {
   console.log("cardData",cartProducts);
   return (
     <>
-      <div>
+      <div style={{display:"flex",justifyContent:"space-between"}}>
         {cartProducts.map((cartProduct) => {
           return (
             <IndividualCartProduct key={cartProduct.Id} cartProduct={cartProduct} />

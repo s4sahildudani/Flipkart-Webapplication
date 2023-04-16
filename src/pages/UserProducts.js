@@ -55,17 +55,21 @@ function UserProducts() {
           {Products.length > 0 && (
             <Grid>
               <Typography variant="h3">Products</Typography>
+              <Grid sx={{display:"flex"}}>
               {Products.map((individualproduct) => (
+                
                 <IndividualProduct
                   individualproduct={individualproduct}
                   key={individualproduct.Id}
                   addtoCart={addtoCart}
                 />
+                
               ))}
+              </Grid>
             </Grid>
           )}
           {Products.length < 1 && (
-            <Grid>
+            <Grid >
               <Typography variant="h3">Please wait....</Typography>
             </Grid>
           )}

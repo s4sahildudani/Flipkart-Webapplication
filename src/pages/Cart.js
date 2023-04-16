@@ -3,9 +3,8 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-
 import TabPanel from "@mui/lab/TabPanel";
-import CartLogin from "../images/cartlogin.jpg";
+// import CartLogin from "../images/cartlogin.jpg";
 import { Typography, Button, Grid } from "@mui/material";
 import CartGrocery from "../images/cartGrocery.jpg";
 import NavData from "../components/NavData";
@@ -81,9 +80,9 @@ function Cart() {
                           Login
                         </Button> */}
 
-              {cartProducts.length > 1 &&  (
+              {cartProducts.length > 0 &&  (
                           <div><h1>Cart</h1>
-                          <div><CardProduct cartProducts={cartProducts} /></div>
+                          <Grid sx={{display:"flex"}}><CardProduct  cartProducts={cartProducts} /></Grid>
                           </div>
                         )} 
                         
