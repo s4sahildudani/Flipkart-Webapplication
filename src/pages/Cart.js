@@ -10,6 +10,7 @@ import CartGrocery from "../images/cartGrocery.jpg";
 import NavData from "../components/NavData";
 import { auth, db } from "../firebase.conflig";
 import CardProduct from "../components/CardProduct";
+import StripeCheckout from "react-stripe-checkout";
 function Cart() {
   const [value, setValue] = useState("1");
 
@@ -34,6 +35,28 @@ function Cart() {
       }
     });
   }, []);
+
+  // qty for seprate array
+  const qty = cartProducts.map((cartProduct) => {
+    return cartProduct.qty;
+  });
+  console.log("qty", qty);
+  // reducing method for Totalqty
+  const reducerofqty = (accumulator, currentvalue) =>
+    accumulator + currentvalue;
+  const Totalqty = qty.reduce(reducerofqty, 0);
+  console.log("Totalqty", Totalqty);
+  const price = cartProducts.map((cartProduct) => {
+    return cartProduct.TotalProductPrice;
+  });
+  const reducerofprice = (accumulator, currentvalue) =>
+    accumulator + currentvalue;
+  const totalprice = price.reduce(reducerofprice, 0);
+  console.log("Totalprice", totalprice);
+
+  function handleToken(token) {
+    console.log("token", token);
+  }
   return (
     <>
       <NavData />
@@ -80,12 +103,36 @@ function Cart() {
                           Login
                         </Button> */}
 
-              {cartProducts.length > 0 &&  (
-                          <div><h1>Cart</h1>
-                          <Grid sx={{display:"flex"}}><CardProduct  cartProducts={cartProducts} /></Grid>
-                          </div>
-                        )} 
-                        
+              {cartProducts.length > 0 && (
+                <>
+                  <div>
+                    <h1>Cart</h1>
+                    <Grid sx={{ display: "flex" }}>
+                      <CardProduct cartProducts={cartProducts} />
+                    </Grid>
+                  </div>
+                  <Grid>
+                    <Typography>Cart Summary</Typography>
+                    <Box sx={{ display: "flex", textAlign: "center" }}>
+                      <Typography>Total number of Products :</Typography>{" "}
+                      <Typography>{Totalqty}</Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", textAlign: "center" }}>
+                      <Typography>Total Price to Pay :</Typography>{" "}
+                      <Typography> $ {totalprice}</Typography>
+                    </Box>
+                    <StripeCheckout
+                      stripeKey="pk_test_51Mxc4RSHVreC2R70y3hxf7cCeADKPfRZKTCIgy017b0XHLrTbq1Pm3VMcX5F6JMxAIrCVLW0nepM2Q3wXUUoeBkz00nPSVieaB"
+                      token={handleToken}
+                      billingAddress
+                      shippingAddress
+                      name="All Products"
+                      amount={totalprice * 100}
+                    ></StripeCheckout>
+                  </Grid>
+                </>
+              )}
+
               {cartProducts.length < 1 && (
                 <Grid>
                   <Typography variant="h3">Please wait....</Typography>

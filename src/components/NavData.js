@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -19,20 +19,18 @@ import Login from "../images/login.jpg";
 import firebase from "../firebase.conflig";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { db, auth } from "../firebase.conflig";
 function NavData() {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const openMenu = Boolean(anchorEl);
   const openMenu2 = Boolean(anchorE2);
-
   const navigate = useNavigate();
-
   // const appVerifier = window.recaptchaVerifier;
   const handleClickOpen = () => {
     setOpen(true);
@@ -71,11 +69,9 @@ function NavData() {
     console.log("click");
     setAnchorEl(event.currentTarget);
   };
-
   const handleSeller = () => {
     navigate("/seller");
   };
-
   function reCaptchaVerify() {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       "sign-in-button",
@@ -89,7 +85,6 @@ function NavData() {
       }
     );
   }
-
   function onSignInSubmit(event) {
     event.preventDefault();
     const phoneNumber = "+91" + phone;
@@ -122,7 +117,7 @@ function NavData() {
       .then((result) => {
         // User signed in successfully.
         const user = result.user;
-        console.log("useruid",user.uid);
+        console.log("useruid", user.uid);
         console.log(JSON.stringify(user));
         alert("User is verified Successfully");
         setLoggedIn(true);
@@ -136,6 +131,20 @@ function NavData() {
       });
   }
 
+  // cart products
+  const [totalproducts, setTotalProducts] = useState(0);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        db.collection("cart " + user.uid).onSnapshot((snapshot) => {
+          const qty = snapshot.docs.length;
+
+          setTotalProducts(qty);
+        });
+      }
+    });
+  }, []);
+  console.log("totalProducts", totalproducts);
   return (
     <div>
       <AppBar
@@ -186,14 +195,19 @@ function NavData() {
                 <SearchIcon />
               </IconButton>
             </Paper>
-            <Button
-              onClick={handleClickOpen}
-              
-            >
-              {loggedIn ? <p style={{color:"white"}}>My Account</p> : <Button sx={{
-                background: "white",
-                color: "blue",
-              }}>Login</Button>}
+            <Button onClick={handleClickOpen}>
+              {loggedIn ? (
+                <p style={{ color: "white" }}>My Account</p>
+              ) : (
+                <Button
+                  sx={{
+                    background: "white",
+                    color: "blue",
+                  }}
+                >
+                  Login
+                </Button>
+              )}
             </Button>
             <form>
               <Dialog
@@ -424,6 +438,7 @@ function NavData() {
               sx={{ marginLeft: "3%", fontSize: "1.2rem" }}
             >
               Cart
+              <span style={{ marginBottom: "4%" }}>{totalproducts}</span>
             </Typography>
           </Toolbar>
         </Container>
@@ -431,5 +446,4 @@ function NavData() {
     </div>
   );
 }
-
 export default NavData;
