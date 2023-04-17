@@ -11,6 +11,8 @@ import NavData from "../components/NavData";
 import { auth, db } from "../firebase.conflig";
 import CardProduct from "../components/CardProduct";
 import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Cart() {
   const [value, setValue] = useState("1");
 
@@ -53,9 +55,21 @@ function Cart() {
     accumulator + currentvalue;
   const totalprice = price.reduce(reducerofprice, 0);
   console.log("Totalprice", totalprice);
-
-  function handleToken(token) {
-    console.log("token", token);
+   const navigate = useNavigate();
+  const handleToken = async(token) =>{
+    const cart = {name:"All Products" ,totalprice};
+    const response = await axios.post('http://localhost:8080/checkout',{
+      token,cart
+    })
+    console.log(response);
+    let {status} = response.data;
+    if(status==="success"){
+      navigate("/")
+      alert("Your order Placed Successfully")
+    }
+    else{
+      alert("Something is wrong in checkout")
+    }
   }
   return (
     <>
