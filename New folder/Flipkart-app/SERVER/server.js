@@ -54,6 +54,7 @@
 
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const stripe = require("stripe")("sk_test_51Mxc4RSHVreC2R70B58zAlHUwR7gmRvqOnWad3w9ddGB85sdWllA3YAu1rOqhe9kpLg8c6a7AHd8aMdLGXeZAU2a00noPFAmca");
 
 const app = express ();
@@ -78,7 +79,7 @@ app.post("/checkout",async (req,res)=>{
   // ]
   console.log(req.body);
   
-
+    
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {price: 'price_1MzErUSHVreC2R70cCzpajI4', quantity: 1},
@@ -92,4 +93,24 @@ app.post("/checkout",async (req,res)=>{
     url:session.url
   }))
 })
+
+app.post('/webhook',bodyParser.raw({type:express.application/json}),async(request,response)=>{
+  let signingsecret = " whsec_f03872a62ffaff716fbe12f7e1b2d0d1e880070bb74b8bca167b27fd6664c5a3";
+  const payload = request.body
+  const sig = request.headers['stripe-signature']
+
+  let event
+  try{
+     event = stripe.webhooks.constructEvent(payload,sig,signingsecret)
+  }
+  catch(error){
+      console.log(error.message)
+      response.status(400).json({success:false})
+      return
+  }
+  console.log(event.type)
+  console.log(event.data.object)
+  console.log(event.data.object.id)
+})
+
 app.listen(4000,() => console.log("Listening on port 4000"))
