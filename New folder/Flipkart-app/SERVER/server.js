@@ -94,7 +94,7 @@ app.post("/checkout",async (req,res)=>{
   }))
 })
 
-app.post('/webhook',bodyParser.raw({type:express.application/json}),async(request,response)=>{
+app.post('/webhook',bodyParser.raw({type:express.application/bodyParser.json}),async(request,response)=>{
   let signingsecret = " whsec_f03872a62ffaff716fbe12f7e1b2d0d1e880070bb74b8bca167b27fd6664c5a3";
   const payload = request.body
   const sig = request.headers['stripe-signature']
