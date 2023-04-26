@@ -62,21 +62,31 @@ const app = express();
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+  bodyParser.json({
+    verify: (request, response, buf) => {
+      request.rawbody = buf;
+    },
+  })
+);
 app.post("/checkout", async (req, res) => {
-  
-  console.log(req.body);
- 
   const session = await stripe.checkout.sessions.create({
-    line_items: [{ price: "price_1MzErUSHVreC2R70cCzpajI4", quantity: 1  }],
+    line_items: [{ price: "price_1N11EmSHVreC2R70jYBQBdFN", quantity: 1 }],
     mode: "payment",
-    success_url: "http://localhost:3000/success",
+    success_url:
+      "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
     cancel_url: "http://localhost:3000/cancel",
+    metadata: {
+      integration_check: "accept_a_payment",
+      
+    },
   });
-
+  console.log("session",session);
   res.send(
     JSON.stringify({
       url: session.url,
+      session,
     })
   );
 });
@@ -99,49 +109,43 @@ app.post("/checkout", async (req, res) => {
 //   console.log(event.data.object)
 //   console.log(event.data.object.id)
 // })
-let endpointSecret;
 
-endpointSecret =
-  "whsec_f03872a62ffaff716fbe12f7e1b2d0d1e880070bb74b8bca167b27fd6664c5a3";
+app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
+  const sig = req.headers["stripe-signature"];
+  let endpointSecret;
 
-  app.post(
-    "/webhook",
-    express.raw({ type: "application/json" }),
-    async (request, response) => {
-      const sig = request.headers["stripe-signature"];
-      let data;
-      let eventType;
-      if (endpointSecret) {
-        try {
-          event = stripe.webhooks.constructEvent(
-            request.body,
-            sig,
-            endpointSecret
-          );
-          console.log("Webhook is  Verified");
-        } catch (err) {
-          console.log(`Webhook Error: ${err.message}`);
-          response.status(400).send(`Webhook Error: ${err.message}`);
-          return;
-        }
-        data = event.data.object;
-        eventType = event.type;
-      } else {
-        data = request.body.data.object;
-        eventType = request.body.type;
-      }
-  
-      // Handle the event
-      if (eventType === "checkout.session.completed") {
-        const session = data;
-        const paymentIntentId = session.payment_intent;
-        console.log(`Payment success with ID: ${paymentIntentId}`);
-        // Store the paymentIntentId in your database or any other storage of your choice
-        // You can use Stripe's API to retrieve payment details from paymentIntentId if needed
-      }
-  
-      // Return a 200 response to acknowledge receipt of the event
-      response.send().end();
+  endpointSecret =
+    "whsec_f03872a62ffaff716fbe12f7e1b2d0d1e880070bb74b8bca167b27fd6664c5a3";
+  let data;
+  let eventType;
+  if (endpointSecret) {
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } catch (err) {
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
     }
-  );
+    data = event.data.object;
+    eventType = event.type;
+  } else {
+    data = req.body.data.object;
+    eventType = req.body.type;
+  }
+
+  if (eventType === "checkout.session.completed") {
+    console.log("data", data);
+    // console.log("Inside checkout.session.completed event block");
+    // stripe.sessions
+    //   .retrieve(data.session)
+    //   .then((session) => {
+    //     console.log("session", session);
+    //     console.log("data", data);
+    //   })
+    //   .catch((err) => console.log(err.message));
+  }
+
+  // Return a 200 response to acknowledge receipt of the event
+  response.send().end();
+});
 app.listen(4000, () => console.log("Listening on port 4000"));
