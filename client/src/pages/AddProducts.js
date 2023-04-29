@@ -8,8 +8,7 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  FormHelperText,
-  FormControl,
+ 
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { db, storage } from "../firebase.conflig";
@@ -77,6 +76,8 @@ function AddProducts() {
                   productDesc,
                   productPrice,
                   url,
+                }).catch((error) => {
+                  console.log("Error occurred while performing the checkout process: ", error);
                 })
                 .then(() => {
                   setSuccessMsg("Product Added Successfully");

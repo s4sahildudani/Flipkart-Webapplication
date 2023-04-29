@@ -10,7 +10,7 @@ import {
   MenuItem,
   Card,
   Slider,
-  Button
+  Button,
 } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -19,7 +19,7 @@ import IndividualProduct from "../components/IndividualProduct";
 import { useNavigate } from "react-router-dom";
 import faLogo from "../images/fa_62673a.png";
 import CloseIcon from "@mui/icons-material/Close";
-import IndividualFilterProduct from "../components/IndividualFilterProduct";
+// import IndividualFilterProduct from "../components/IndividualFilterProduct";
 const initialFilters = [
   { id: 1, name: "Plus (FAssured)" },
   { id: 2, name: "River" },
@@ -28,15 +28,15 @@ const initialFilters = [
 function UserProducts() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenBrand, setIsOpenBrand] = useState(false);
-  const [isOpenTypes, setIsOpenTypes] = useState(false);
-  const [isOpenTheme, setIsOpenTheme] = useState(false);
-  const [isOpenDiscount, setIsOpenDiscount] = useState(false);
-  const [isOpenColor, setIsOpenColor] = useState(false);
-  const [isOpenOccasion, setIsOpenOccasion] = useState(false);
-  const [isOpenSize, setIsOpenSize] = useState(false);
-  const [isOpenRatings, setIsOpenRatings] = useState(false);
-  const [isOpenOffers, setIsOpenOffers] = useState(false);
-  const [isOpenAvailable, setIsOpenAvailable] = useState(false);
+  // const [isOpenTypes, setIsOpenTypes] = useState(false);
+  // const [isOpenTheme, setIsOpenTheme] = useState(false);
+  // const [isOpenDiscount, setIsOpenDiscount] = useState(false);
+  // const [isOpenColor, setIsOpenColor] = useState(false);
+  // const [isOpenOccasion, setIsOpenOccasion] = useState(false);
+  // const [isOpenSize, setIsOpenSize] = useState(false);
+  // const [isOpenRatings, setIsOpenRatings] = useState(false);
+  // const [isOpenOffers, setIsOpenOffers] = useState(false);
+  // const [isOpenAvailable, setIsOpenAvailable] = useState(false);
   const [filters, setFilters] = useState(initialFilters);
 
   const handleMaxValueChange = (event) => {
@@ -49,33 +49,33 @@ function UserProducts() {
   const toggleBrand = () => {
     setIsOpenBrand(!isOpenBrand);
   };
-  const toggleTheme = () => {
-    setIsOpenTheme(!isOpenTheme);
-  };
-  const toggleTypes = () => {
-    setIsOpenTypes(!isOpenTypes);
-  };
-  const toggleDiscount = () => {
-    setIsOpenDiscount(!isOpenDiscount);
-  };
-  const toggleColor = () => {
-    setIsOpenColor(!isOpenColor);
-  };
-  const toggleOccasion = () => {
-    setIsOpenOccasion(!isOpenOccasion);
-  };
-  const toggleSize = () => {
-    setIsOpenSize(!isOpenSize);
-  };
-  const toggleRatings = () => {
-    setIsOpenRatings(!isOpenRatings);
-  };
-  const toggleOffers = () => {
-    setIsOpenOffers(!isOpenOffers);
-  };
-  const toggleAvailable = () => {
-    setIsOpenAvailable(!isOpenAvailable);
-  };
+  // const toggleTheme = () => {
+  //   setIsOpenTheme(!isOpenTheme);
+  // };
+  // const toggleTypes = () => {
+  //   setIsOpenTypes(!isOpenTypes);
+  // };
+  // const toggleDiscount = () => {
+  //   setIsOpenDiscount(!isOpenDiscount);
+  // };
+  // const toggleColor = () => {
+  //   setIsOpenColor(!isOpenColor);
+  // };
+  // const toggleOccasion = () => {
+  //   setIsOpenOccasion(!isOpenOccasion);
+  // };
+  // const toggleSize = () => {
+  //   setIsOpenSize(!isOpenSize);
+  // };
+  // const toggleRatings = () => {
+  //   setIsOpenRatings(!isOpenRatings);
+  // };
+  // const toggleOffers = () => {
+  //   setIsOpenOffers(!isOpenOffers);
+  // };
+  // const toggleAvailable = () => {
+  //   setIsOpenAvailable(!isOpenAvailable);
+  // };
   const [Products, setProducts] = useState([]);
   const navigate = useNavigate();
   const getProducts = async () => {
@@ -149,21 +149,23 @@ function UserProducts() {
   // productCategory
 
   const [productCategory, setProuctCategory] = useState("");
-  console.log("ProductCategory",productCategory)
+  console.log("ProductCategory", productCategory);
   // Filtered Products
 
   const [filteredProducts, setfilteredProducts] = useState([]);
-  console.log("filterproducts",filteredProducts);
+  console.log("filterproducts", filteredProducts);
   const handleChangefilter = (IndividualSpan) => {
     setActive(IndividualSpan.Id);
     setProuctCategory(IndividualSpan.text);
     filterFunction(IndividualSpan.text);
-    console.log("individualspan",IndividualSpan)
+    console.log("individualspan", IndividualSpan);
   };
 
   const filterFunction = () => {
     const filteredProducts = Products.filter((product) => {
-      return product.productPrice >= minValue && product.productPrice <= maxValue;
+      return (
+        product.productPrice >= minValue && product.productPrice <= maxValue
+      );
     });
     setfilteredProducts(filteredProducts);
   };
@@ -459,7 +461,9 @@ function UserProducts() {
                         onClick={() => handleChangefilter(IndividualSpan)}
                         id={IndividualSpan.id}
                         key={index}
-                        className={IndividualSpan.Id=== active ? active :"color:red"}
+                        className={
+                          IndividualSpan.Id === active ? active : "color:red"
+                        }
                       >
                         {IndividualSpan.text}
                       </span>
@@ -883,49 +887,80 @@ function UserProducts() {
             </Box>
           </Card>
         </Grid>
-        <Grid container spacing={2} sx={{padding:"4%"}}>
-  {filteredProducts.length > 0 && (
-    <>
-      <Typography variant="h5">{productCategory}</Typography>
-      {filteredProducts.map((product) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-          <Card sx={{ border: "2px solid black", width: "100%", padding: "1rem" }}>
-            <img src={product.url} alt={product.productBrand} style={{ width: "100%" }} />
-            <Typography variant="subtitle1">{product.productBrand}</Typography>
-            <Typography variant="body1">{product.productDesc}</Typography>
-            <Typography variant="body1">{product.productPrice}</Typography>
-            <Typography variant="body1">{product.qty}</Typography>
-            <Typography variant="body1">{product.productColor}</Typography>
-            <Typography variant="body1">{product.productSize}</Typography>
-            <Button onClick={addtoCart} sx={{ background: "red", color: "white", mt: "1rem" }}>
-              Added To Cart
-            </Button>
-          </Card>
+        <Grid
+          container
+          spacing={2}
+          sx={{ padding: "4%" }}
+          breakpoints={{ xs: "auto" }}
+        >
+          {filteredProducts.length > 0 && (
+            <>
+              <Typography variant="h5">{productCategory}</Typography>
+              {filteredProducts.map((product) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+                  <Card
+                    sx={{
+                      border: "2px solid black",
+                      width: "100%",
+                      padding: "3%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <img
+                      src={product.url}
+                      alt={product.productBrand}
+                      style={{ width: "90%", height: "50%" }}
+                    />
+                    <Typography variant="subtitle1">
+                      {product.productBrand}
+                    </Typography>
+                    <Typography variant="body1">
+                      {product.productDesc}
+                    </Typography>
+                    <Typography variant="body1">
+                      {product.productPrice}
+                    </Typography>
+                    <Typography variant="body1">{product.qty}</Typography>
+                    <Typography variant="body1">
+                      {product.productColor}
+                    </Typography>
+                    <Typography variant="body1">
+                      {product.productSize}
+                    </Typography>
+                    <Button
+                      onClick={addtoCart}
+                      sx={{ background: "red", color: "white", mt: "3%" }}
+                    >
+                      Added To Cart
+                    </Button>
+                  </Card>
+                </Grid>
+              ))}
+            </>
+          )}
+          {filteredProducts.length < 1 && (
+            <>
+              {Products.length > 0 && (
+                <>
+                  {/* <Typography variant="h5">Products</Typography> */}
+                  {Products.map((product) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+                      <IndividualProduct
+                        individualproduct={product}
+                        addtoCart={addtoCart}
+                      />
+                    </Grid>
+                  ))}
+                </>
+              )}
+              {Products.length < 1 && (
+                <Grid item xs={12}>
+                  <Typography variant="h5">Please wait...</Typography>
+                </Grid>
+              )}
+            </>
+          )}
         </Grid>
-      ))}
-    </>
-  )}
-  {filteredProducts.length < 1 && (
-    <>
-      {Products.length > 0 && (
-        <>
-          <Typography variant="h5">Products</Typography>
-          {Products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-              <IndividualProduct individualproduct={product} addtoCart={addtoCart} />
-            </Grid>
-          ))}
-        </>
-      )}
-      {Products.length < 1 && (
-        <Grid item xs={12}>
-          <Typography variant="h5">Please wait...</Typography>
-        </Grid>
-      )}
-    </>
-  )}
-</Grid>
-
       </Grid>
     </Grid>
   );

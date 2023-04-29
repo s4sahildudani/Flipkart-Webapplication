@@ -9,7 +9,9 @@ function IndividualCartProduct({cartProduct ,sessiondata}) {
          if(user){
           db.collection("cart " + user.uid).doc(cartProduct.ID).delete().then(()=>{
             console.log("Cart is Successfully Deleted")
-          })
+          }).catch((error) => {
+            console.log("Error occurred while performing the checkout process: ", error);
+          });
          }
        })
     }

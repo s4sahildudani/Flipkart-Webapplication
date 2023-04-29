@@ -5,7 +5,6 @@ import {
   Typography,
   Card,
   TextField,
-  Menu,
   FormControl,
   InputLabel,
   MenuItem,
@@ -33,6 +32,8 @@ function SellTshirts() {
     const imageRef = ref(storage, `images/${image.name + v4()}`);
     uploadBytes(imageRef, image).then(() => {
       alert("Image Uploaded");
+    }).catch((error) => {
+      console.log("Error occurred while performing the checkout process: ", error);
     });
   };
 

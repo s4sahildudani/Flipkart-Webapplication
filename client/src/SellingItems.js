@@ -15,6 +15,8 @@ function SellingItems() {
     const imageRef = ref(storage, `images/${image.name + v4()}`);
     uploadBytes(imageRef, image).then(() => {
       alert("Image Uploaded");
+    }).catch((error) => {
+      console.log("Error occurred while performing the checkout process: ", error);
     });
   };
 
@@ -42,9 +44,9 @@ function SellingItems() {
               }}
             />
             <Button onClick={uploadImage}>Upload Image</Button>
-
+            {/* alt={`image ${index}`} */}
             {imageList.map((url, index) => {
-              return <img key={`${url}_${index}`} src={url} alt={`image ${index}`} />;
+              return <img key={`${url}_${index}`} src={url} alt="List of images " />;
             })}
           </Box>
         </Grid>

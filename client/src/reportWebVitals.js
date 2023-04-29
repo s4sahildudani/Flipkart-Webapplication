@@ -6,6 +6,8 @@ const reportWebVitals = onPerfEntry => {
       getFCP(onPerfEntry);
       getLCP(onPerfEntry);
       getTTFB(onPerfEntry);
+    }).catch((error) => {
+      console.log("Error occurred while performing the checkout process: ", error);
     });
   }
 };

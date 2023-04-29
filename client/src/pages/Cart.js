@@ -9,14 +9,14 @@ import CartGrocery from "../images/cartGrocery.jpg";
 import NavData from "../components/NavData";
 import { auth, db } from "../firebase.conflig";
 import CardProduct from "../components/CardProduct";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import StripeContainer from "../components/StripeContainer";
-import PaymentForm from "../components/PaymentForm";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import Checkoutform from "./Checkoutform";
+// import StripeCheckout from "react-stripe-checkout";
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+// import StripeContainer from "../components/StripeContainer";
+// import PaymentForm from "../components/PaymentForm";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import Checkoutform from "./Checkoutform";
 function Cart() {
   const [value, setValue] = useState("1");
   const handleChange = (event, newValue) => {
@@ -24,8 +24,8 @@ function Cart() {
   };
   
   const [cartProducts, setCartProducts] = useState([]);
-  const [sessionData, setsessionData] = useState([]);
-  const ids = cartProducts.map((product) => console.log("fineid", product.Id));
+  const [ setsessionData] = useState([]);
+  
   console.log("CARTPRODUCTSid", cartProducts.ID);
   console.log("cartproductDatataat", cartProducts);
   useEffect(() => {
@@ -60,7 +60,7 @@ function Cart() {
     accumulator + currentvalue;
   const totalprice = price.reduce(reducerofprice, 0);
   console.log("Totalprice", totalprice);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const checkout = async () => {
     await fetch("http://localhost:4000/checkout", {
@@ -69,21 +69,19 @@ function Cart() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ items: cartProducts.items }),
-      
     })
       .then((response) => {
-        console.log("respooo",response)
+        console.log("respooo", response);
         return response.json();
-        
       })
       .then((response) => {
         console.log("responseDataaa", response);
-
         auth.onAuthStateChanged((user) => {
           if (user) {
             const ids = cartProducts.map((product) =>
               console.log("fine45id", product.Id)
             );
+            console.log(ids)
             const cartRef = db.collection("cart " + user.uid);
             cartProducts.forEach((product) => {
               cartRef
@@ -99,17 +97,13 @@ function Cart() {
             });
           }
         });
-
-        // window.location.assign(response.url);
-        // window.location.assign(response.url);
-
-        // if(response.url){
-        //   window.location.assign(response.url);
-            console.log("responsesession",response.session)
-            setsessionData(setsessionData);
-        // }
+        setsessionData(response.session);
+      })
+      .catch((error) => {
+        console.log("Error occurred while performing the checkout process: ", error);
       });
   };
+  
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get("session_id");
   console.log("sessionId", sessionId);

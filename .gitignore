@@ -1,9 +1,17 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/Server/node_modules
 /.pnp
 .pnp.js
+/client/.env.local
+client/.env.local
+.env
+/Server/.env.local
+Server/.env.local
+.env
+
+
 
 # testing
 /coverage

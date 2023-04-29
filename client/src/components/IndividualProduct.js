@@ -10,7 +10,7 @@ function IndividualProduct({ individualproduct ,addtoCart }) {
     <Grid container >
       <Grid >
         <Box sx={{display:"flex"}}>
-        <Card sx={{width:"350Px" ,height:"600px"}}>
+        <Card sx={{width:"250Px" ,height:"500px",textAlign:"center"}}>
           <Box><img src={individualproduct.url} width="80%" height="50%" alt="" /></Box>
           <Box><Typography>{individualproduct.productDesc}</Typography></Box>
           <Box><Typography>{individualproduct.productSize}</Typography></Box>
