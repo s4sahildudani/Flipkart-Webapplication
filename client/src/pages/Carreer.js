@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from "react-elastic-carousel";
-import { Card, Typography } from "@mui/material";
+import { Card} from "@mui/material";
 import Carrier1 from '../images/CarrierCar1.webp';
 import Carrier2 from '../images/CarrierCar2.webp';
 import Carrier3 from '../images/CarrierCar3.webp';

@@ -22,7 +22,8 @@ import SellingItems from "./SellingItems";
 import Shoes from "./pages/Shoes";
 import AddProducts from "./pages/AddProducts";
 import UserProducts from "./pages/UserProducts";
-
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 function App() {
   return (
     <div className="App">
@@ -50,6 +51,8 @@ function App() {
           <Route path="/shoes" element={<Shoes />} />
           <Route path="/userproducts" element={<UserProducts />} />
           <Route path="/addproducts" element={<AddProducts />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<Cancel />} />
         </Routes>
       </BrowserRouter>
     </div>

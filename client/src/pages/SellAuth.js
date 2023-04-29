@@ -8,7 +8,6 @@ import TwentyFour from "../images/24x7 sell.svg";
 import AccountManage from "../images/account_management.svg";
 import SimplePrice from "../images/SimplePrice.svg";
 import Buisness from "../images/BuisnessOn.svg";
-import FastRegulat from "../images/b2716b3f-3f6b-458f-ba09-3705401d2c18 (1).webp";
 import LowReturns from "../images/lowReturns.svg";
 import Higher from "../images/higher.svg";
 import { Formik, Form, Field, ErrorMessage } from "formik";

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid ,Card ,Box,Typography ,Button} from '@mui/material';
 import { auth, db } from "../firebase.conflig";
-function IndividualCartProduct({cartProduct}) {
+function IndividualCartProduct({cartProduct ,sessiondata}) {
     console.log("cartprodhyhbchb",cartProduct);
+    console.log("sessiondaata" ,sessiondata);
     const handleCartDelete = () =>{
        auth.onAuthStateChanged(user=>{
          if(user){

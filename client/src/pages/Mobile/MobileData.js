@@ -1,7 +1,6 @@
 import React from "react";
-import { Grid, Card, Typography, Box } from "@mui/material";
+import { Grid,  Typography, Box } from "@mui/material";
 import NavData from "../../components/NavData";
-import Footer from "../../components/Footer";
 import MobileImg1 from "./Images/mobil1.jpg";
 import MobileImg2 from "./Images/mobil2.jpg";
 import MobileImg3 from "./Images/mobil3.jpg";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Grid } from "@mui/material";
 import shopNow1 from  "../images/shopNow.jpg";
-import shopNow2 from  "../images/shopNow2.jpg";
+// import shopNow2 from  "../images/shopNow2.jpg";
 function ShopNow() {
   return (
     <div>

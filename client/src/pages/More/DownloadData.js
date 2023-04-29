@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grid ,Card ,Box ,Typography} from '@mui/material';
+import {Grid ,Box ,Typography} from '@mui/material';
 import './DownloadData.css';
 import  AppStore from '../../images/App-Store_50c61d.png';
 import PlayStore from '../../images/Play-Store_33bb40.png';
