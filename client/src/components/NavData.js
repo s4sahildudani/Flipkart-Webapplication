@@ -171,7 +171,7 @@ function NavData() {
               >
                 FlipKart
               </Typography>
-              <Box sx={{ display: "flex" }}>
+              <Box sx={{  display: { xs: "none", md: "none" ,lg:"flex" }  }}>
                 <Typography>Explore</Typography>
                 <Typography sx={{ marginLeft: "5%" }}>Plus</Typography>
               </Box>
@@ -180,7 +180,7 @@ function NavData() {
               component="form"
               sx={{
                 p: "2px 4px",
-                display: "flex",
+                display: { xs: "none", md: "none" ,lg:"flex" } ,
                 alignItems: "center",
                 width: "45%",
                 marginLeft: "3%",
@@ -405,13 +405,13 @@ function NavData() {
             </form>
             <Typography
               onClick={handleSeller}
-              sx={{ marginLeft: "3%", fontSize: "1.3rem" }}
+              sx={{ marginLeft: "3%", fontSize: "1.3rem" , display: { xs: "none", md: "none" }  }}
             >
               Become a seller
             </Typography>
             <Typography
               onClick={handleClickMenu}
-              sx={{ marginLeft: "3%", fontSize: "1.2rem" }}
+              sx={{ marginLeft: "3%", fontSize: "1.2rem", display: { xs: "none", md: "none" }  }}
             >
               More
             </Typography>

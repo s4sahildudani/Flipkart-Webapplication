@@ -17,7 +17,7 @@ function IndividualCartProduct({cartProduct ,sessiondata}) {
     }
   return (
     <>
-    <Grid sx={{display:"flex",justifyContent:"space-between"}}  key={cartProduct.ID}>
+    <Grid sx={{display:{xs:"block" ,lg:"flex"},justifyContent:"space-between"}}  key={cartProduct.ID}>
       <Card sx={{border:"2px solid black",width:"250px" ,marginLeft:"7%",padding:"5%"}}>
           <img src={cartProduct.url} alt="" />
           <Box><Typography>{cartProduct.productBrand}</Typography></Box>

@@ -9,11 +9,13 @@ function Footer() {
         }}
       >
         <Box
-          justifyContent="space-between"
           sx={{
-            color: "white",
             display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+            alignItems: { xs: "flex-start", md: "center" },
             padding: "2%",
+            color:"white"
           }}
         >
           <Box>
@@ -74,19 +76,21 @@ function Footer() {
           </Box>
         </Box>
         <hr style={{ width: "100%", color: "white" }} />
-        <Box sx={{ display: "flex" ,justifyContent:"space-between" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           {" "}
           <Box>
-            <Typography sx={{color:"white"}}>Become Seller</Typography>
+            <Typography sx={{ color: "white" }}>Become Seller</Typography>
           </Box>
           <Box>
-            <Typography sx={{color:"white"}}>Gift Cards</Typography>
+            <Typography sx={{ color: "white" }}>Gift Cards</Typography>
           </Box>
           <Box>
-            <Typography sx={{color:"white"}}>Help Center</Typography>
+            <Typography sx={{ color: "white" }}>Help Center</Typography>
           </Box>
           <Box>
-            <Typography sx={{color:"white"}}>© 2007-2023 Flipkart.com</Typography>
+            <Typography sx={{ color: "white" }}>
+              © 2007-2023 Flipkart.com
+            </Typography>
           </Box>
           <Box>
             <img alt="" />

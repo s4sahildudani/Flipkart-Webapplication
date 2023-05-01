@@ -9,6 +9,7 @@ import CartGrocery from "../images/cartGrocery.jpg";
 import NavData from "../components/NavData";
 import { auth, db } from "../firebase.conflig";
 import CardProduct from "../components/CardProduct";
+import Footer from "../components/Footer";
 // import StripeCheckout from "react-stripe-checkout";
 // import axios from "axios";
 // import { useNavigate } from "react-router-dom";
@@ -22,10 +23,10 @@ function Cart() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   const [cartProducts, setCartProducts] = useState([]);
-  const [ setsessionData] = useState([]);
-  
+  const [setsessionData] = useState([]);
+
   console.log("CARTPRODUCTSid", cartProducts.ID);
   console.log("cartproductDatataat", cartProducts);
   useEffect(() => {
@@ -81,7 +82,7 @@ function Cart() {
             const ids = cartProducts.map((product) =>
               console.log("fine45id", product.Id)
             );
-            console.log(ids)
+            console.log(ids);
             const cartRef = db.collection("cart " + user.uid);
             cartProducts.forEach((product) => {
               cartRef
@@ -100,10 +101,13 @@ function Cart() {
         setsessionData(response.session);
       })
       .catch((error) => {
-        console.log("Error occurred while performing the checkout process: ", error);
+        console.log(
+          "Error occurred while performing the checkout process: ",
+          error
+        );
       });
   };
-  
+
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get("session_id");
   console.log("sessionId", sessionId);
@@ -131,8 +135,7 @@ function Cart() {
                 onChange={handleChange}
                 aria-label="lab API tabs example"
               >
-                <Tab sx={{ marginLeft: "500px" }} label="FlipKart" value="1" />
-                <Tab sx={{ marginLeft: "450px" }} label="Grocery" value="2" />
+                <Tab sx={{ textAlign: "center" }} label="FlipKart" value="1" />
               </TabList>
             </Box>
             <TabPanel
@@ -143,8 +146,14 @@ function Cart() {
                 <>
                   <div>
                     <h1>Cart</h1>
-                    <Grid sx={{ display: "flex" }}>
-                      <CardProduct  cartProducts={cartProducts} />
+                    <Grid sx={{  display: { xs: "block", md: "block" ,lg:"flex" } }}>
+                      <Grid
+                        container
+                        spacing={2}
+                        sx={{ flexWrap: "wrap", gap: "1rem" ,display: { xs: "block", md: "block" ,lg:"flex" } }}
+                      >
+                        <CardProduct cartProducts={cartProducts} />
+                      </Grid>
                     </Grid>
                   </div>
                   <Grid>
@@ -168,27 +177,14 @@ function Cart() {
                 </Grid>
               )}
             </TabPanel>
-            <TabPanel
-              value="2"
-              sx={{ justifyContent: "center", textAlign: "center" }}
-            >
-              <img src={CartGrocery} alt="" height="20%" width="20%" />
-              <Typography>Missing cart items?</Typography>
-              <Typography>Login to see you added previously</Typography>
-              <Button
-                sx={{
-                  background: "#2874f0",
-                  color: "white",
-                  width: "10%",
-                  marginTop: "30px",
-                }}
-              >
-                ShopNow
-              </Button>
-            </TabPanel>
           </TabContext>
         </Box>
       </div>
+      <Box sx={{  marginTop: "10%", '@media (max-width: 768px)': {
+       marginTop: "1400px"
+    },}}>
+        <Footer />
+      </Box>
     </>
   );
 }

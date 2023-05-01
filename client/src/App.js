@@ -24,6 +24,7 @@ import AddProducts from "./pages/AddProducts";
 import UserProducts from "./pages/UserProducts";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
+import Protected from "./components/Protected";
 function App() {
   return (
     <div className="App">
@@ -49,7 +50,11 @@ function App() {
           <Route path="/sellingItems" element={<SellingItems />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/shoes" element={<Shoes />} />
-          <Route path="/userproducts" element={<UserProducts />} />
+          <Route
+            path="/userproducts"
+            element={<UserProducts Component={Protected} />}
+          />
+
           <Route path="/addproducts" element={<AddProducts />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
