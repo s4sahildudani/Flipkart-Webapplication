@@ -147,11 +147,7 @@ function Cart() {
                   <div>
                     <h1>Cart</h1>
                     <Grid sx={{  display: { xs: "block", md: "block" ,lg:"flex" } }}>
-                      <Grid
-                        container
-                        spacing={2}
-                        sx={{ flexWrap: "wrap", gap: "1rem" ,display: { xs: "block", md: "block" ,lg:"flex" } }}
-                      >
+                    <Grid item xs={12} sm={6} md={4} lg={3} >
                         <CardProduct cartProducts={cartProducts} />
                       </Grid>
                     </Grid>
